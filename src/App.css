@@ -3,31 +3,48 @@ body{
   color:antiquewhite
 }
 
-.Main {
-  align-content: center;
+.Text {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers child elements horizontally */
+  margin-top: 30vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.intro {
+  text-align: center;
+  font-size: large;
+  font-family: 'inria serif', sans-serif;
+  color: #B2FFBB;
+}
+
+.name {
+  text-align: center;
+  font-size: 5vh;
+  font-family: 'Inter', sans-serif;
+  color: #33AD3B;
+}
+
+.description {
+  text-align: center;
+  font-size: small;
+  font-family: 'inria serif', sans-serif;
+  color: #9CC298;
+}
+
+.intro, .name, .description {
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Removes default padding */
+  text-align: center; /* Centers text */
+}
+
+.intro h1, .name h1, .description h1 {
+  margin: 0; /* Removes default margin for <h1> */
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  background-color: #000000;
-  min-height: 5vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(20px);
-  font-weight: 500;
-  color: #4FA031;
 }
 
 .App-link {

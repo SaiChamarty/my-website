@@ -11,7 +11,7 @@ export default function Navbar() {
             key={product.id}
             style={{
                 listStyle: 'none',
-                color: 'darkgreen',
+                color: '#4FA031',
                 margin: '10px'
             }}
         >
@@ -19,7 +19,7 @@ export default function Navbar() {
                 href={product.source}
                 style={{
                     textDecoration: 'none',
-                    color: 'darkgreen'
+                    color: '#4FA031'
                 }}
             >
                 {product.title}
@@ -47,7 +47,8 @@ export default function Navbar() {
 
             {/* Navigation Links */}
             <div style={{
-                marginRight: '30px'
+                marginRight: '30px',
+                fontWeight: 700
             }}>
                 <ul
                     style={{
