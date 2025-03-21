@@ -1,23 +1,23 @@
 import './App.css';
 import Navbar from './components/Navbar';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './components/Home';
+import Projects from './components/Projects';
+import Saiborg from './components/Saiborg';
+import About from './components/About';
+
 
 function App() {
   return (
     <BrowserRouter>
       <div className='App'>
         <Navbar />
-        <div className='Text'>
-          <div className='intro'>
-            <h1>Hey there! I'm</h1>
-          </div>
-          <div className='name'>
-            <h1>Sai Chamarty</h1>
-          </div>
-          <div className='description'>
-            <h1>I am an engineer passionate about App development and Machine Learning.</h1>
-          </div>
-        </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/saiborg" element={<Saiborg />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
       </div>
     </BrowserRouter>
   );
