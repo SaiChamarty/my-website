@@ -4,7 +4,6 @@ import Navbar from './Navbar';
 function Saiborg() {
   return (
     <div className='App'>
-      <Navbar />
       <div className='Text'>
         <div className='name'>
           <h1>Saiborg</h1>

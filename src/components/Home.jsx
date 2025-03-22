@@ -4,12 +4,17 @@ import Navbar from './Navbar';
 function Home() {
   return (
     <div className='App'>
-      <Navbar />
       <div className='Text'>
-        <div className='name'>
-          <h1>Home page</h1>
+          <div className='intro'>
+            <h1>Hey there! I'm</h1>
+          </div>
+          <div className='name'>
+            <h1>Sai Chamarty</h1>
+          </div>
+          <div className='description'>
+            <h1>I am an engineer passionate about App development and Machine Learning.</h1>
+          </div>
         </div>
-      </div>
     </div>
   );
 }
