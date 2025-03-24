@@ -9,7 +9,7 @@ function Projects() {
           <h1>Projects</h1>
         </div>
         <div className='description'>
-          <h1>Soon to be added!!!!</h1>
+          <h1>Soon to be added!!</h1>
         </div>
       </div>
     </div>
