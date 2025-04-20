@@ -1,19 +1,29 @@
 import '../App.css';
 import Navbar from './Navbar';
+import Timeline from '../components/Timeline';
 
-function Projects() {
+const initialData = [
+  { title: 'Project A', description: 'Description A' },
+  { title: 'Project B', description: 'Description B' },
+  // …etc.
+];
+
+
+export default function Projects() {
+  // mock “load more” fn—swap for real API call
+  const loadMore = async () => {
+    return [
+      { title: 'Project C', description: '…' },
+      { title: 'Project D', description: '…' }
+    ];
+  };
+
   return (
-    <div className='App'>
-      <div className='Text'>
-        <div className='name'>
-          <h1>Projects</h1>
-        </div>
-        <div className='description'>
-          <h1>Soon to be added!!!</h1>
-        </div>
-      </div>
+    <div className="App">
+      <Timeline
+        initialProjects={initialData}
+        loadMoreProjects={loadMore}
+      />
     </div>
   );
 }
-
-export default Projects;
