@@ -1,30 +1,28 @@
 // src/components/Timeline.jsx
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import './Timeline.css';
 import { projectDict } from '../data/projects';
+import ProjectContent from './ProjectContent';
 
-export default function Timeline({ loadMoreProjects, initialProjects }) {
-    const projects = Object.entries(projectDict).map(
-        ([title, description]) => ({ title, description })
-    );
+export default function Timeline() {
+  const projects = Object.entries(projectDict).map(
+    ([title, description]) => ({ title, description })
+  );
 
-    return (
-        <div>
-            <div className="marker" />
-            <div className="timeline">
-                {/* --- YOUR PROJECT NODES --- */}
-                {projects.map((proj, idx) => (
-                    <div className="timeline-item" key={idx}>
-                    <div className="marker" />
-                    <div className="content">
-                        <h3>{proj.title}</h3>
-                        <p>{proj.description}</p>
-                    </div>
-                    </div>
-                ))}
-            </div>
-        </div>
-      
-        
-    );
+  return (
+    <div>
+      {/* standalone start marker */}
+      <div className="marker" />
+
+      <div className="timeline">
+        {projects.map((proj, idx) => (
+          <ProjectContent
+            key={idx}
+            title={proj.title}
+            description={proj.description}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }

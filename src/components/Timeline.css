@@ -16,8 +16,18 @@
   top: 0;
   bottom: 0;
   width: 4px;
-  background: #7CFC00; /* neon green */
-  transform: translateX(-50%);
+  background: #7CFC00;           /* neon green */
+  transform-origin: top center;  /* pivot at the top */
+  transform: translateX(-50%) scaleY(0);
+  animation: growLine 1s ease-out forwards;
+}
+
+
+/* animate only the rail */
+@keyframes growLine {
+  to {
+    transform: translateX(-50%) scaleY(1);
+  }
 }
 
 .timeline-item {
@@ -30,18 +40,21 @@
   animation: fadeInUp 0.6s forwards;
 }
 
-.timeline-item:nth-child(even) .content {
-  margin-left: 2rem;
-  text-align: left;
-}
 
 .timeline-item:nth-child(odd) {
   flex-direction: row-reverse;
 }
 
+.timeline-item:nth-child(even) .content {
+  margin-left: 2rem;    /* original horizontal offset */
+  margin-right: 0;      /* make sure the other side is zero */
+  text-align: center;   /* center the text inside */
+}
+
 .timeline-item:nth-child(odd) .content {
-  margin-right: 2rem;
-  text-align: right;
+  margin-right: 2rem;   /* original offset the other direction */
+  margin-left: 0;       /* reset the opposite side */
+  text-align: center;   /* center the text */
 }
 
 .marker {
@@ -55,10 +68,31 @@
   transform: translateX(-50%);
 }
 
+/* make your card a column‑flex box that truly centers its children */
 .content {
-  background: rgba(255,255,255,0.1);
+  /* fixed size or min‑size to your taste */
+  width: 12rem;
+  min-height: 6rem;
+
+  /* padding counts inside the box */
+  box-sizing: border-box;
   padding: 1rem;
+
+  /* center everything, stacked vertically */
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* horizontal centering */
+  justify-content: center;  /* vertical centering */
+
+  text-align: center;
+  background: rgba(255,255,255,0.1);
   border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* reset margins so they don’t push you off center */
+.content > * {
+  margin: 0;
 }
 
 .loading-sentinel {
