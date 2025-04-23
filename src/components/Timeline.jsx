@@ -20,6 +20,7 @@ export default function Timeline() {
             key={idx}
             title={proj.title}
             description={proj.description}
+            index={idx}               // ← pass the index
           />
         ))}
       </div>

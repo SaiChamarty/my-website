@@ -1,4 +1,12 @@
 /* src/components/Timeline.css */
+:root {
+  /* tweak these two to control everything */
+  --branch-length: 6rem;
+  --branch-gap:    2rem;
+}
+
+
+/*-----------------------------MAIN TIMELINE CODE ---------------------------*/
 
 .timeline {
   position: relative;
@@ -14,7 +22,7 @@
   position: absolute;
   left: 50%;
   top: 0;
-  bottom: 0;
+  bottom: calc(6rem + 0.625rem + 4px);
   width: 4px;
   background: #7CFC00;           /* neon green */
   transform-origin: top center;  /* pivot at the top */
@@ -35,9 +43,50 @@
   display: flex;
   align-items: center;
   margin: 6rem 0;
+}
+/*--------------------------------BRANCH LINE CODE----------------------------------*/
+
+/* --- branch styling & animation --- */
+.branch {
+  position: absolute;
+  top: 50%;   
+  /* start just outside the right edge of the circle: */
+  left: calc(50% + 0.60rem + 4px);
+  width: 0;                   
+  height: 4px;
+  background: #7CFC00;
+  transform-origin: left center;
+  animation: branchGrow 0.5s ease-out forwards;
+}
+
+/* for those “reversed” items, mirror it on the right side */
+.timeline-item:nth-child(even) .branch {
+  left: auto;
+  right: calc(50% + 0.60rem + 4px);
+  transform-origin: right center;
+}
+
+/* Now fade & slide the content in after the branch is done */
+.content {
   opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.6s forwards;
+}
+
+/* 2) odd boxes fade-in from the left (moving right) */
+.timeline-item:nth-child(odd) .content {
+  animation: fadeRight 0.6s ease-out forwards;
+  animation-delay: 0.5s; /* after branchGrow */
+}
+
+/* 3) even boxes fade-in from the right (moving left) */
+.timeline-item:nth-child(even) .content {
+  animation: fadeLeft 0.6s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+/* match the length of your static offset */
+/* timeline-item branchGrow keyframes */
+@keyframes branchGrow {
+  to { width: var(--branch-length); }
 }
 
 
@@ -46,13 +95,13 @@
 }
 
 .timeline-item:nth-child(even) .content {
-  margin-left: 2rem;    /* original horizontal offset */
+  margin-left: -0.5rem;    /* original horizontal offset */
   margin-right: 0;      /* make sure the other side is zero */
   text-align: center;   /* center the text inside */
 }
 
 .timeline-item:nth-child(odd) .content {
-  margin-right: 2rem;   /* original offset the other direction */
+  margin-right: -0.5rem;   /* original offset the other direction */
   margin-left: 0;       /* reset the opposite side */
   text-align: center;   /* center the text */
 }
@@ -106,3 +155,69 @@
     transform: none;
   }
 }
+
+
+/* 1) Define the two directional fades */
+@keyframes fadeRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/*--------------------------------MOBILE CODE START----------------------------------*/
+@media (max-width: 600px) {
+  /* hide the rail graphics */
+  .marker,
+  .branch,
+  .timeline::before {
+    display: none;
+  }
+
+  .timeline {
+    padding: 4rem 0;
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .timeline-item {
+    display: block;
+    margin: 2rem 0;
+  }
+
+  .content {
+    width: calc(100% - 2rem);
+    margin: 0 auto;
+    padding: 1rem;
+    box-sizing: border-box;
+
+    /* left-border as your “rail” */
+    border-left: 4px solid #7CFC00;
+
+    background: rgba(255,255,255,0.1);
+    border-radius: 0.5rem;
+    text-align: left;
+
+    /* entrance animation using our CSS variable */
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease-out forwards;
+    animation-delay: var(--fade-delay, 0s);
+  }
+}
+/*--------------------------------MOBILE CODE END----------------------------------*/
