@@ -1,15 +1,24 @@
-import '../App.css';
-import Navbar from './Navbar';
+// Saiborg.jsx
+import React from 'react';
+import './Saiborg.css';
 
 function Saiborg() {
   return (
-    <div className='App'>
-      <div className='Text'>
-        <div className='name'>
-          <h1>Saiborg</h1>
+    <div>
+      <div>
+        <div className="name">
+          <p className="jersey">Saiborg</p>
         </div>
-        <div className='description'>
-          <h1>Upcoming AI talk-bot</h1>
+        {/* new image */}
+        <div className="image-container">
+          <img
+            src="/saiborg.png"
+            alt="Saiborg"
+            className="saiborg-img"
+          />
+        </div>
+        <div className='building'>
+          <p>Building...</p>
         </div>
       </div>
     </div>
