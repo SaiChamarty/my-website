@@ -1,0 +1,40 @@
+/* pull in the font */
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+
+/* apply it */
+.name p {
+  font-family: 'Jersey 10', sans-serif;
+  /* if you also meant “size 10” in px: */
+  /* font-size: 10px; */
+  color: #33AD3B;
+  text-align: left;
+  margin-left: 5rem;
+  margin-top: 2rem;
+}
+
+/* wrapper to center anything inside */
+.image-container {
+  /* if you want it dead-center in its parent: */
+  text-align: center;
+  /* add vertical spacing if you like: */
+  margin: 1rem 0;
+}
+
+/* responsive image */
+.saiborg-img {
+  display: inline-block;   /* so margin: auto works on inline images */
+  max-width: 100%;         /* never exceed its container’s width */
+  max-height: 70vh;   /* caps the height at 70% of viewport height */
+  width: auto;        /* lets width scale automatically */
+  height: auto;       /* preserve aspect ratio */
+  margin-top: -4rem;
+}
+
+.building {
+    text-align: center;
+    font-family: 'Jersey 10', sans-serif;
+    /* if you also meant “size 10” in px: */
+    font-size: 35px;
+    color: #33AD3B;
+    margin-top: -2rem;
+}
