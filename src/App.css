@@ -1,3 +1,20 @@
+.App {
+  /* make your container fill the screen... */
+  width: 100vw;
+  height: 100vh;
+
+  /* ...and hide any children outside its bounds */
+  overflow: hidden;
+
+  /* ensure it’s the clipping context */
+  position: relative;
+}
+
+html {
+  font-size: 16px;
+}
+
+
 body{
   background-color: #000000;
   color:antiquewhite
@@ -12,33 +29,48 @@ body{
 
 .intro {
   text-align: center;
-  font-size: large;
   font-family: 'inria serif', sans-serif;
   color: #B2FFBB;
+  /* RESPONSIVE: between 1rem and 2rem, scaling on 4vw */
+  font-size: clamp(1rem, 4vw, 2rem);
 }
 
 .name {
   text-align: center;
-  font-size: 5vh;
   font-family: 'Inter', sans-serif;
   color: #33AD3B;
+
+  /* RESPONSIVE: between 2rem and 5rem, scaling on 8vw */
+  font-size: clamp(2rem, 8vw, 5rem);
 }
 
 .description {
   text-align: center;
-  font-size: small;
   font-family: 'inria serif', sans-serif;
   color: #9CC298;
+  /* RESPONSIVE: between .9rem and 1.5rem, scaling on 3vw */
+  font-size: clamp(.9rem, 3vw, 1.5rem);
+
+  /* keep your text centered but limit its width */
+  width: 80%;
+  max-width: 80vw;
+  margin: 0 auto;
+  word-break: break-word;
+}
+
+/* App.css */
+.description .anim-clip {
+  /* hide anything that peeks out of this box */
+  overflow: hidden;
+
+  /* make sure the box spans the full width of its parent */
+  width: 100%;
 }
 
 .intro, .name, .description {
   margin: 0; /* Removes default margin */
   padding: 0; /* Removes default padding */
   text-align: center; /* Centers text */
-}
-
-.intro h1, .name h1, .description h1 {
-  margin: 0; /* Removes default margin for <h1> */
 }
 
 @media (prefers-reduced-motion: no-preference) {
