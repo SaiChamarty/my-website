@@ -1,7 +1,6 @@
-import '../App.css';
-import Navbar from './Navbar';
+import './About.css';
 
-function Projects() {
+function About() {
   return (
     <div className='App'>
       <div className='Text'>
@@ -16,4 +15,4 @@ function Projects() {
   );
 }
 
-export default Projects;
+export default About;

@@ -23,7 +23,7 @@ jobs:
       - name: 🚀 Deploy to Server
         run: |
           ssh -p 2250 saichamarty@junebase.com << 'EOF'
-            cd ~/PersonalWebsite
+            cd ~/website/PersonalWebsite
             git pull origin main
             npm install
             npm run build
