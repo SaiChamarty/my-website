@@ -1,5 +1,5 @@
 import './Projects.css';
-import Timeline from '../Timeline/Timeline';
+import Timeline from './Timeline';
 
 const initialData = [
   { title: 'Project A', description: 'Description A' },

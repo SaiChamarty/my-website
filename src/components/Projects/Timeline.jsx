@@ -2,7 +2,7 @@
 import React from 'react';
 import './Timeline.css';
 import { projectDict } from '../../data/projects';
-import ProjectContent from '../Projects/ProjectContent';
+import ProjectContent from './ProjectContent';
 
 export default function Timeline() {
   const projects = Object.entries(projectDict).map(
