@@ -1,21 +1,20 @@
 // src/pages/Home.jsx
-import '../App.css';
-import Navbar from './Navbar';
-import AnimatedText from '../components/AnimatedText';
+import styles from './Home.module.css';
+import AnimatedText from '../AnimatedText/AnimatedText';
 
 function Home() {
   return (
-    <div className='App'>
-      <div className='Text'>
-        <div className='intro'>
+    <div className={styles.App}>
+      <div className={styles.Text}>
+        <div className={styles.intro}>
           <AnimatedText text="Hey there! I'm" />
         </div>
-        <div className='name'>
-          <div className='anim-clip'>
+        <div className={styles.name}>
+          <div className={styles.animclip}>
             <AnimatedText text="Sai Chamarty" baseDelay={0.5} />
           </div>
         </div>
-        <div className='description'>
+        <div className={styles.description}>
           <AnimatedText
             text="I am an engineer passionate about App development and Machine Learning."
             baseDelay={1}

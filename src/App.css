@@ -4,7 +4,6 @@
   height: 100vh;
 
   /* ...and hide any children outside its bounds */
-  overflow: hidden;
 
   /* ensure it’s the clipping context */
   position: relative;
@@ -12,59 +11,12 @@
 
 html {
   font-size: 16px;
+  overflow-x: hidden;
 }
-
 
 body{
   background-color: #000000;
   color:antiquewhite
-}
-
-.Text {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centers child elements horizontally */
-  margin-top: 30vh;
-}
-
-.intro {
-  text-align: center;
-  font-family: 'inria serif', sans-serif;
-  color: #B2FFBB;
-  /* RESPONSIVE: between 1rem and 2rem, scaling on 4vw */
-  font-size: clamp(1rem, 4vw, 2rem);
-}
-
-.name {
-  text-align: center;
-  font-family: 'Inter', sans-serif;
-  color: #33AD3B;
-
-  /* RESPONSIVE: between 2rem and 5rem, scaling on 8vw */
-  font-size: clamp(2rem, 8vw, 5rem);
-}
-
-.description {
-  text-align: center;
-  font-family: 'inria serif', sans-serif;
-  color: #9CC298;
-  /* RESPONSIVE: between .9rem and 1.5rem, scaling on 3vw */
-  font-size: clamp(.9rem, 3vw, 1.5rem);
-
-  /* keep your text centered but limit its width */
-  width: 80%;
-  max-width: 80vw;
-  margin: 0 auto;
-  word-break: break-word;
-}
-
-/* App.css */
-.description .anim-clip {
-  /* hide anything that peeks out of this box */
-  overflow: hidden;
-
-  /* make sure the box spans the full width of its parent */
-  width: 100%;
 }
 
 .intro, .name, .description {
@@ -94,6 +46,11 @@ body{
 
 .hamburger {
   display: none;
+}
+
+/* (Optional) make sure all elements respect box-sizes */
+* {
+  box-sizing: border-box;
 }
 
 @media (max-width: 768px) {

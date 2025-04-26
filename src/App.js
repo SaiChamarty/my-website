@@ -1,11 +1,11 @@
 import './App.css';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './components/Home';
-import Projects from './components/Projects';
-import Saiborg from './components/Saiborg';
-import About from './components/About';
-import Notfound from './components/Notfound'; // Your custom 404 component
+import Home from './components/Home/Home';
+import Projects from './components/Projects/Projects';
+import Saiborg from './components/Saiborg/Saiborg';
+import About from './components/About/About';
+import Notfound from './components/Notfound/Notfound'; // Your custom 404 component
 
 
 function App() {

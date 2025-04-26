@@ -1,0 +1,58 @@
+.App {
+  /* make your container fill the screen... */
+  width: 100vw;
+  height: 70vh;
+
+  /* ...and hide any children outside its bounds */
+
+  /* ensure it’s the clipping context */
+  position: relative;
+}
+
+html {
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+
+body{
+  background-color: #000000;
+  color:antiquewhite
+}
+
+.Text {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers child elements horizontally */
+  margin-top: 20vh;
+}
+
+.intro {
+  text-align: center;
+  font-family: 'inria serif', sans-serif;
+  color: #B2FFBB;
+  /* RESPONSIVE: between 1rem and 2rem, scaling on 4vw */
+  font-size: clamp(1rem, 4vw, 2rem);
+}
+
+.name {
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  color: #33AD3B;
+
+  /* RESPONSIVE: between 2rem and 5rem, scaling on 8vw */
+  font-size: clamp(1rem, 4vw, 2.5rem);
+}
+
+.description {
+  text-align: center;
+  font-family: 'inria serif', sans-serif;
+  color: #9CC298;
+  /* RESPONSIVE: between .9rem and 1.5rem, scaling on 3vw */
+  font-size: clamp(0.5rem, 2vw, 1rem);
+
+  /* keep your text centered but limit its width */
+  width: 80%;
+  max-width: 80vw;
+  margin: 0 auto; 
+}

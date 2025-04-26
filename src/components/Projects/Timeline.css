@@ -51,7 +51,7 @@
   position: absolute;
   top: 50%;   
   /* start just outside the right edge of the circle: */
-  left: calc(50% + 0.60rem + 4px);
+  left: calc(50% + 0.40rem + 4px);
   width: 0;                   
   height: 4px;
   background: #7CFC00;
@@ -62,7 +62,7 @@
 /* for those “reversed” items, mirror it on the right side */
 .timeline-item:nth-child(even) .branch {
   left: auto;
-  right: calc(50% + 0.60rem + 4px);
+  right: calc(50% + 0.40rem + 4px);
   transform-origin: right center;
 }
 
@@ -109,8 +109,8 @@
 .marker {
   position: absolute;
   left: 50%;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
   background: black;
   border: 4px solid #7CFC00;
   border-radius: 50%;
