@@ -1,0 +1,90 @@
+/* Root nav wrapper */
+nav.navbar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top row: logo + desktop links + hamburger */
+.navbar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.navbar-inner .logo {
+  width: 70px;
+  height: 70px;
+  padding: 10px;
+}
+
+/* ====== Desktop ====== */
+.nav-links {
+  margin-right: 30px;
+  font-weight: 700;
+}
+
+.nav-links ul {
+  display: flex;
+  padding: 10px;
+  margin: 0;
+  list-style: none;
+  gap: 20px;
+}
+
+.nav-item {
+  margin: 10px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #4FA031;
+}
+
+/* hide the hamburger by default */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.hamburger .hamburger-line {
+  width: 25px;
+  height: 3px;
+  background-color: #4FA031;
+  margin: 4px 0;
+}
+
+/* ====== Mobile ====== */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+  .nav-links {
+    display: none;
+  }
+}
+
+/* Slide-out mobile menu */
+.mobile-menu {
+  position: absolute; /* relative to nav.navbar */
+  top: 70px;          /* adjust if your navbar height changes */
+  right: 20px;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-menu .nav-item {
+  margin: 10px 0; /* vertical spacing in mobile menu */
+}

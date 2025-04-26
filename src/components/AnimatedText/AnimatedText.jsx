@@ -22,8 +22,8 @@ export default function AnimatedText({
         const angle = Math.random() * 2 * Math.PI;
 
         // use window dims for radii
-        const x0 = Math.cos(angle) * vw * 0.8;
-        const y0 = Math.sin(angle) * vh * 0.8;
+        const x0 = Math.cos(angle) * vw *0.5;
+        const y0 = Math.sin(angle) * vw *0.5;
 
         return (
           <motion.span

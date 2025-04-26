@@ -1,6 +1,6 @@
 // src/components/ProjectContent.jsx
 import React from 'react';
-import './Timeline.css';        // we’re keeping all styles here
+import '../Timeline/Timeline.css';        // we’re keeping all styles here
 
 export default function ProjectContent({ title, description, index }) {
   // compute a delay (e.g. 0.6s per item)

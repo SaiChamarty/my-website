@@ -1,6 +1,5 @@
-import '../App.css';
-import Navbar from './Navbar';
-import Timeline from '../components/Timeline';
+import './Projects.css';
+import Timeline from '../Timeline/Timeline';
 
 const initialData = [
   { title: 'Project A', description: 'Description A' },
