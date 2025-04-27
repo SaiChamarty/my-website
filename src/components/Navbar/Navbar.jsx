@@ -49,12 +49,10 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile slide-out menu */}
-      {isOpen && (
-        <div className="mobile-menu">
-          <ul>{listItems}</ul>
-        </div>
-      )}
+      {/* Mobile slide-out menu (always in the DOM, but height‐clipped) */}
+      <div className={`mobile-menu ${isOpen ? 'open' : ''}`}>
+        <ul>{listItems}</ul>
+      </div>
     </nav>
   );
 }

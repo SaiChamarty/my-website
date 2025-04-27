@@ -69,20 +69,35 @@ nav.navbar {
 
 /* Slide-out mobile menu */
 .mobile-menu {
-  position: absolute; /* relative to nav.navbar */
-  top: 70px;          /* adjust if your navbar height changes */
+  position: absolute;   /* same as before */
+  top: 70px;
   right: 20px;
-  background: #000;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 10px;
+  overflow: hidden;     /* hide everything above the max-height */
+  max-height: 0;        /* start “closed” */
+  transition: 
+    max-height 0.3s ease-in-out,
+    opacity    0.2s ease-in-out;
+
+  opacity: 0;           /* and fade it out when closed */
+  z-index: 9999;
+}
+
+/* when .open is present, allow content to show */
+.mobile-menu.open {
+  max-height: 300px;    /* big enough to fit all your links */
+  opacity: 1;
 }
 
 .mobile-menu ul {
   list-style: none;
-  padding: 0;
+  padding: 10px 0;
   margin: 0;
+}
+
+.mobile-menu .nav-link {
+  display: block;
+  width: 100%;
+  padding: 8px 0;
 }
 
 .mobile-menu .nav-item {
