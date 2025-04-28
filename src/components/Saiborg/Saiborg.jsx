@@ -24,14 +24,21 @@ export default function Saiborg() {
           camera={{ position: [0, 0, 20], fov: 50 }}
         >
           {/* Medium‐strength green ambient fill */}
-          <ambientLight color="#33AD3B" intensity={0.3} />
+          <ambientLight color="#FFDBB5" intensity={0.2} />
 
           {/* Green “key” light for some subtle shading */}
-          <directionalLight
-            color="#33AD3B"
+          {/* Key from the right */}
+          <hemisphereLight
+            skyColor="#FFDBB5"       // top-down color
+            groundColor="#8A5230"    // bounced from below
             intensity={0.3}
-            position={[10, 0, 0]}   // directly overhead
-            target-position={[0, 0, 0]}  // make sure it points at the origin
+          />
+
+          {/* Optional directional “rim” or “key” for contrast */}
+          <directionalLight
+            color="#FFB874"
+            intensity={0.2}
+            position={[10, 10, 5]}
           />
 
           <Model position={[0, 0.5, 0]} scale={[1.2, 1.2, 1.2]} />
