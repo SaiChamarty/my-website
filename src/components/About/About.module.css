@@ -1,58 +1,90 @@
-.App {
-  /* make your container fill the screen... */
+/* 1) load your pixel font for the green section titles */
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jockey+One&display=swap');
+
+
+/* 2) container resets + background */
+.container {
   width: 100vw;
-  height: 70vh;
+  min-height: 100vh;
+  /* top/right/bottom/left */
+  padding: 1rem 2rem 4rem 6rem;
+  background-color: #000;
+  color: antiquewhite;
+  box-sizing: border-box;
 
-  /* ...and hide any children outside its bounds */
+  font-family: 'Jockey One', sans-serif;
+  font-stretch: normal;
 
-  /* ensure it’s the clipping context */
-  position: relative;
+  /* start hidden, then fade in */
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards;
 }
 
-html {
-  font-size: 16px;
-  overflow-x: hidden;
-}
-
-
-body{
-  background-color: #000000;
-  color:antiquewhite
-}
-
-.Text {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centers child elements horizontally */
-  margin-top: 20vh;
-}
-
-.intro {
-  text-align: center;
-  font-family: 'inria serif', sans-serif;
-  color: #B2FFBB;
-  /* RESPONSIVE: between 1rem and 2rem, scaling on 4vw */
-  font-size: clamp(1rem, 4vw, 2rem);
-}
-
-.name {
-  text-align: center;
-  font-family: 'Inter', sans-serif;
+/* 3) common section title style (the pixelated green headings) */
+.sectionTitle {
+  font-family: 'Jersey 10', sans-serif;
   color: #33AD3B;
-
-  /* RESPONSIVE: between 2rem and 5rem, scaling on 8vw */
-  font-size: clamp(1rem, 4vw, 2.5rem);
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 2rem 0 1rem;
+  line-height: 1.2;
+  /* optional: tighten spacing if it still feels wide */
+  letter-spacing: 0;
+  font-stretch: normal;
 }
 
-.description {
-  text-align: center;
-  font-family: 'inria serif', sans-serif;
-  color: #9CC298;
-  /* RESPONSIVE: between .9rem and 1.5rem, scaling on 3vw */
-  font-size: clamp(0.5rem, 2vw, 1rem);
+/* 4) main greeting */
+.mainHeading {
+  font-size: clamp(2rem, 6vw, 3rem);
+  margin: 0 0 1rem;
+  color: #fff;
+}
 
-  /* keep your text centered but limit its width */
-  width: 80%;
-  max-width: 80vw;
-  margin: 0 auto; 
+/* 5) paragraph text */
+.paragraph {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  line-height: 1.6;
+  max-width: 700px;
+  margin-bottom: 2rem;
+}
+
+
+/* 6) education block */
+.education {
+  margin-bottom: 2rem;
+}
+
+.eduInstitution {
+  font-weight: 700;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  margin: 0 0 0.25rem;
+}
+
+.eduDetail {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  margin: 0;
+}
+
+/* 7) bullet list */
+.list {
+  list-style-type: disc;
+  margin: 0 0 2rem 1.5rem;
+  padding: 0;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+.list li {
+  margin-bottom: 0.5rem;
+}
+
+/* 8) fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
