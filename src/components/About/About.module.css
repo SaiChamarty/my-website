@@ -8,7 +8,11 @@
   width: 100vw;
   min-height: 100vh;
   /* top/right/bottom/left */
-  padding: 1rem 2rem 4rem 6rem;
+  /* top/right/bottom/left: */
+  padding: 1rem        /* top */
+           2rem        /* right */
+           4rem        /* bottom */
+           clamp(0.5rem, 4vh, 4rem);  /* left = between .5rem and 4rem, based on 4vh */
   background-color: #000;
   color: antiquewhite;
   box-sizing: border-box;
