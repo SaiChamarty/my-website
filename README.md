@@ -13,7 +13,10 @@ Home page has a really cool introduction about me, Sai Chamarty and what I like.
 Saiborg is a conversational AI robot being built. The animation used in the website has been created by me in blender and displayed on the page using three.js.
 
 ### Deployment
+This website is live at:
+[https://sai.junebase.com]
 
-### `npm run build` fails to minify
+Junebase is my server that I built using an old lenovo laptop.  
+Junebase acts like vercel deployment and github actions make it possible for auto-updating the website deployed when main branch of this repo is updated.   
+Pretty cool right?  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
