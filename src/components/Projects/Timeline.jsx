@@ -1,34 +1,26 @@
 // src/components/Timeline.jsx
-import React from "react";
-import "./Timeline.css";
-import { projectDict } from "../../data/projects";
-import ProjectContent from "./ProjectContent";
-import { useState }     from "react";
+import React from 'react';
+import './Timeline.css';
+import { projectDict } from '../../data/projects';
+import ProjectContent from './ProjectContent';
 
 export default function Timeline() {
-
-  const [shift, setShift] = useState(false);    // ← new
-
-  const projects = Object.entries(projectDict).map(([title, cfg]) => ({
-    title,
-    description: cfg.description,
-    demo:        cfg.demo,
-    onDemo:      cfg.onDemo,
-    shiftOnOpen: cfg.shiftOnOpen
-
-  }));
+  const projects = Object.entries(projectDict).map(
+    ([title, description]) => ({ title, description })
+  );
 
   return (
     <div>
+      {/* standalone start marker */}
       <div className="marker" />
 
-      <div className={`timeline${shift ? " timeline--shift" : ""}`}>
-        {projects.map((p, idx) => (
+      <div className="timeline">
+        {projects.map((proj, idx) => (
           <ProjectContent
-            key={p.title}
-            index={idx}
-            notifyShift={setShift}        // ← pass setter down
-            {...p}          // title, description, demo, onDemo
+            key={idx}
+            title={proj.title}
+            description={proj.description}
+            index={idx}               // ← pass the index
           />
         ))}
       </div>
