@@ -17,6 +17,7 @@
   transform: translateY(1.5rem);
 }
 
+/*------This part is for the straight loading timeline-------*/ 
 .timeline::before {
   content: '';
   position: absolute;
@@ -38,71 +39,25 @@
   }
 }
 
+/*------------------------end timeline load-----------------------------*/
+
 .timeline-item {
   position: relative;
   display: flex;
   align-items: center;
   margin: 6rem 0;
-}
-
-/* Make the whole item clickable and change cursor */
-.timeline-item {
-  cursor: pointer;
-}
-
-/* 1) make sure .content will animate */
-.timeline-item .content {
-  /* pivot from center */
-  transform-origin: center center;
-  /* animate scale and shadow */
-  transition: transform 0.3s ease-out,
-              box-shadow 0.3s ease-out;
-}
-
-/* 2) grow + shadow on hover */
-.timeline-item:hover > .content {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-}
-
-/* 3) tiny “pressed” effect */
-.timeline-item:active > .content {
-  transform: scale(0.98);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer; /* Make the whole item clickable and change cursor */
 }
 
 /* ---------- rail shift when a wide card is open ---------- */
+/* I observed that along with the timeline, the box is also moving 40% to the left ^^^^^^*/
 .timeline--shift {
   transform: translateX(-40%);
   transition: transform 0.35s ease;
 }
 
+
 /* ---------- new utility styles ---------- */
-.content-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.demo-btn {
-  background: none;
-  border: none;
-  padding: 0.25rem;
-  cursor: pointer;
-  color: #7cfc00;                /* neon green matches theme */
-}
-
-.demo-wrapper {
-  width: 100%;
-  margin-top: 1rem;
-}
-
-/* make .content a row when open so demo appears left of text */
-.content {
-  position: relative;           /* lets us abs‑position icon‑bar */
-}
 
 .content.open {
   display: flex;
@@ -113,36 +68,22 @@
   transform: translateX(-40%);      /* push 40 % to the left */
 }
 
-/* left‑hand demo pane */
-.demo-wrapper {
-  flex: 0 0 auto;               /* don't stretch */
-}
-
-/* text on the right */
-.text-stack {
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 /* ---------- handwritten demo widget ---------- */
+
+/*"Clear" and "Predict" buttons code*/
 .hdemo {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.hdemo-canvas {
-  border: 2px solid #7cfc00;
-  border-radius: 0.5rem;
-  background: black;
-  touch-action: none;           /* smoother drawing on touch */
-}
+/* Button alignment */
 .hdemo-btns {
   margin-top: 0.5rem;
   display: flex;
   gap: 0.5rem;
 }
+
+/* Buttons CSS design */
 .hdemo-btns button {
   padding: 0.25rem 0.75rem;
   border-radius: 0.25rem;
@@ -151,12 +92,18 @@
   color: #7cfc00;
   cursor: pointer;
 }
-.hdemo-result {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
+
+/* The canvas code */
+.hdemo-canvas {
+  border: 2px solid #7cfc00;
+  border-radius: 0.5rem;
+  background: black;
+  touch-action: none;           /* smoother drawing on touch */
 }
 
-/* ---------- icon bar bottom‑right ---------- */
+/* ------------------ end ----------------------- */
+
+/* ---------- icon bar bottom‑right ------------- */
 .icon-bar {
   position: absolute;
   bottom: 0.4rem;
@@ -170,7 +117,6 @@
   cursor: pointer;
   color: #7cfc00;
 }
-
 
 /*--------------------------------BRANCH LINE CODE----------------------------------*/
 
@@ -194,21 +140,25 @@
   transform-origin: right center;
 }
 
-/* Now fade & slide the content in after the branch is done */
-.content {
-  opacity: 0;
-}
-
 /* 2) odd boxes fade-in from the left (moving right) */
 .timeline-item:nth-child(odd) .content {
   animation: fadeRight 0.6s ease-out forwards;
   animation-delay: 0.5s; /* after branchGrow */
+  margin-right: -0.5rem;   /* original offset the other direction */
+  margin-left: 0;       /* reset the opposite side */
+  text-align: center;   /* center the text */
+}
+.timeline-item:nth-child(odd) {
+  flex-direction: row-reverse;
 }
 
 /* 3) even boxes fade-in from the right (moving left) */
 .timeline-item:nth-child(even) .content {
   animation: fadeLeft 0.6s ease-out forwards;
   animation-delay: 0.5s;
+  margin-left: -0.5rem;    /* original horizontal offset */
+  margin-right: 0;      /* make sure the other side is zero */
+  text-align: center;   /* center the text inside */
 }
 
 /* match the length of your static offset */
@@ -217,23 +167,7 @@
   to { width: var(--branch-length); }
 }
 
-
-.timeline-item:nth-child(odd) {
-  flex-direction: row-reverse;
-}
-
-.timeline-item:nth-child(even) .content {
-  margin-left: -0.5rem;    /* original horizontal offset */
-  margin-right: 0;      /* make sure the other side is zero */
-  text-align: center;   /* center the text inside */
-}
-
-.timeline-item:nth-child(odd) .content {
-  margin-right: -0.5rem;   /* original offset the other direction */
-  margin-left: 0;       /* reset the opposite side */
-  text-align: center;   /* center the text */
-}
-
+/* the circular markers on the timeline */
 .marker {
   position: absolute;
   left: 50%;
@@ -250,6 +184,7 @@
   /* fixed size or min‑size to your taste */
   width: 12rem;
   min-height: 6rem;
+  opacity: 0; /* Now fade & slide the content in after the branch is done */
 
   /* padding counts inside the box */
   box-sizing: border-box;
@@ -267,14 +202,7 @@
   overflow: hidden;
 }
 
-/* reset margins so they don’t push you off center */
-.content > * {
-  margin: 0;
-}
-
-.loading-sentinel {
-  height: 1px;
-}
+/*--------------------------- Fades animations ---------------------------------- */
 
 /* simple fade‑in animation */
 @keyframes fadeInUp {
@@ -284,8 +212,7 @@
   }
 }
 
-
-/* 1) Define the two directional fades */
+/* Define the two directional fades */
 @keyframes fadeRight {
   0% {
     opacity: 0;
