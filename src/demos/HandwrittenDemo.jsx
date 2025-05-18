@@ -62,12 +62,15 @@ export default function HandwrittenDemo() {
       // invert so white stroke → 1, black bg → 0
       pixels.push(1 - data[i] / 255);
     }
+    
+    console.time("predict-click");
+    console.log("Button clicked – firing request");
 
     try {
       const res  = await fetch("https://ml.junebase.com/predict", {
         method : "POST",
         headers: { "Content-Type": "application/json" },
-        body   : JSON.stringify({ image: pixels })
+        body   : JSON.stringify({ pixels })
       });
       const { prediction, confidence } = await res.json();
       setPrediction({ prediction, confidence: (confidence * 100).toFixed(1) });
@@ -75,6 +78,8 @@ export default function HandwrittenDemo() {
       console.error(err);
       setPrediction({ error: "API error – see console" });
     }
+    
+    console.timeEnd("predict-click");
   };
 
   /* ---------- UI ---------- */

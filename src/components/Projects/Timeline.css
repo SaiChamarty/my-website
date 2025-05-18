@@ -12,9 +12,11 @@
   position: relative;
   padding: 4rem 0;
   width: 90%;
-  max-width: 600px;
+  max-width: none;
   margin: 0 auto;
-  transform: translateY(1.5rem);
+  transform: translateY(1.5rem); /* this is for moving the timeline a tad bit down*/
+  --rail-offset: 0%;              /* default */
+  transition: --rail-offset 0.35s ease;   /* animates smoothly */
 }
 
 /*------This part is for the straight loading timeline-------*/ 
@@ -49,23 +51,18 @@
   cursor: pointer; /* Make the whole item clickable and change cursor */
 }
 
-/* ---------- rail shift when a wide card is open ---------- */
-/* I observed that along with the timeline, the box is also moving 40% to the left ^^^^^^*/
-.timeline--shift {
-  transform: translateX(-40%);
-  transition: transform 0.35s ease;
-}
-
-
-/* ---------- new utility styles ---------- */
+/*------------------------content open-----------------------------*/
 
 .content.open {
   display: flex;
   flex-direction: row;
-  gap: 1rem;
-  width: clamp(22rem, 60vw, 48rem);
-  /* ---------- tweak open card so 40 % grows left, 60 % right ---------- */
-  transform: translateX(-40%);      /* push 40 % to the left */
+  width: clamp(22rem, 40vw, 48rem);
+}
+
+.text-stack { flex: 1 1 auto; }
+.demo-wrapper {
+  flex: 0 0 70%;
+  margin-left: auto;
 }
 
 /* ---------- handwritten demo widget ---------- */
@@ -100,7 +97,6 @@
   background: black;
   touch-action: none;           /* smoother drawing on touch */
 }
-
 /* ------------------ end ----------------------- */
 
 /* ---------- icon bar bottom‑right ------------- */
@@ -144,8 +140,6 @@
 .timeline-item:nth-child(odd) .content {
   animation: fadeRight 0.6s ease-out forwards;
   animation-delay: 0.5s; /* after branchGrow */
-  margin-right: -0.5rem;   /* original offset the other direction */
-  margin-left: 0;       /* reset the opposite side */
   text-align: center;   /* center the text */
 }
 .timeline-item:nth-child(odd) {
@@ -156,9 +150,36 @@
 .timeline-item:nth-child(even) .content {
   animation: fadeLeft 0.6s ease-out forwards;
   animation-delay: 0.5s;
-  margin-left: -0.5rem;    /* original horizontal offset */
   margin-right: 0;      /* make sure the other side is zero */
   text-align: center;   /* center the text inside */
+}
+
+/*————— flush-to-branch on load —————*/
+
+/* Even items live on the LEFT of the spine → lock their RIGHT edge at branch */
+.timeline-item:nth-child(even) .content {
+  margin-left: auto;   /* free left side */
+  margin-right: calc(50% + var(--branch-length) + 1rem);
+}
+
+/* Odd items live on the RIGHT of the spine → lock their LEFT edge at branch */
+.timeline-item:nth-child(odd) .content {
+  margin-left:  calc(50% + var(--branch-length) + 1rem);
+  margin-right: auto;  /* free right side */
+}
+
+/*————— grow-in-place on open —————*/
+
+/* Even opens should expand LEFT, so keep the right-lock, free the left */
+.timeline-item:nth-child(even) .content.open {
+  margin-left: auto !important;
+  margin-right: calc(50% + var(--branch-length) + 1rem) !important;
+}
+
+/* Odd opens should expand RIGHT, so keep the left-lock, free the right */
+.timeline-item:nth-child(odd) .content.open {
+  margin-left: calc(50% + var(--branch-length) + 1rem) !important;
+  margin-right: auto !important;
 }
 
 /* match the length of your static offset */
@@ -192,8 +213,6 @@
 
   /* center everything, stacked vertically */
   display: flex;
-  flex-direction: column;
-  align-items: center;      /* horizontal centering */
   justify-content: center;  /* vertical centering */
 
   text-align: center;

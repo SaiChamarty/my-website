@@ -1,6 +1,8 @@
 // src/components/ProjectContent.jsx
+
+// this is the project block that has the demo, description and names of my projects.
 import React, { useState, useEffect } from "react";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react"; // external link for the demo button
 import { motion, AnimatePresence } from "framer-motion";
 import "./Timeline.css";
 
@@ -15,13 +17,16 @@ export default function ProjectContent(props) {
     index
   } = props;
 
+  // for opening and closing of the project demo blocks
   const [open, setOpen] = useState(false);
   const delay = 0.6 * (index + 1);
 
+  // toggle the open state or run the demo
   const handleDemo = () => {
     if (onDemo) onDemo();
     else if (Demo) setOpen(o => !o);
   };
+
   /* let Timeline know when we need the rail shifted */
   useEffect(() => {
     if (shiftOnOpen && notifyShift) notifyShift(open);
@@ -59,10 +64,24 @@ export default function ProjectContent(props) {
           {open && Demo && (
             <motion.div
               className="demo-wrapper"
-              initial={{ width: 0, height: 0, opacity: 0 }}
-              animate={{ width: "auto", height: "auto", opacity: 1 }}
-              exit={{ width: 0, height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              style={{
+                width: "40%",
+                overflow: "hidden",
+                transformOrigin: index % 2 === 0
+                  ? "right center"
+                  : "left center",
+              }}
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{
+                scale: 0,
+                opacity: 0,
+                transition: { duration: 0 }    // ← instant vanish
+              }}
+              transition={{
+                scale:   { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
+                opacity: { duration: 0.3, ease: "easeInOut" }
+              }}
             >
               <Demo />
             </motion.div>
