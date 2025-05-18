@@ -36,10 +36,9 @@ export default function ProjectContent(props) {
     <div className="timeline-item">
       <div className="marker" />
       <div className="branch" />
-
       <div
-        className={`content${open ? " open" : ""}`}
-        style={{ "--fade-delay": `${delay}s` }}
+        className="content"
+        style={{ '--fade-delay': `${delay}s` }}
       >
         {/* textual stack */}
         <div className="text-stack">
