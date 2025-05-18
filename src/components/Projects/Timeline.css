@@ -5,6 +5,14 @@
   --branch-gap:    2rem;
 }
 
+.App {
+  /* make your container fill the screen... */
+  width: 100vw;
+  height: 100vh;
+  /* ensure it’s the clipping context */
+  position: relative;
+}
+
 
 /*-----------------------------MAIN TIMELINE CODE ---------------------------*/
 

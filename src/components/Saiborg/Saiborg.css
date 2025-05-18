@@ -11,12 +11,14 @@
   animation: fadeIn 1s ease-out forwards;
 }
 
-/* Top-left “Saiborg” */
+/* Top-left Saiborg element (its positioning) */
 .name {
   position: absolute;
   top: 1rem;
   left: 1rem;
 }
+
+/* This is for the text "Saiborg" */
 .name p {
   font-family: 'Jersey 10', sans-serif;
   font-size: 2.5rem;
@@ -25,7 +27,7 @@
   margin-left: 3rem;
 }
 
-/* Centered canvas */
+/* Centered canvas for the rotating animation */
 .canvas-container {
   position: absolute;
   top: 50%;
@@ -38,7 +40,7 @@
   margin-top: -11rem;
 }
 
-/* Bottom-center “Building…” */
+/* Bottom-center “Building…” text + element */
 .building {
   position: absolute;
   bottom: 1rem;
@@ -51,7 +53,7 @@
   text-align: center;
 }
 
-/*This is for smooth fade in*/
+/* This is for smooth fade in when loaded */
 @keyframes fadeIn {
   from { opacity: 0 }
   to   { opacity: 1 }

@@ -26,6 +26,7 @@ export default function ProjectContent(props) {
     if (onDemo) onDemo();
     else if (Demo) setOpen(o => !o);
   };
+
   /* let Timeline know when we need the rail shifted */
   useEffect(() => {
     if (shiftOnOpen && notifyShift) notifyShift(open);
@@ -33,9 +34,11 @@ export default function ProjectContent(props) {
 
   return (
     <div className="timeline-item">
-      <div className="marker" />
-      <div className="branch" />
+      {/* For every timeline item, there is a marker (circle), and then a branch, and then the content (either open or closed) */}
+      <div className="marker" /> {/* circle */ }
+      <div className="branch" /> {/* branch */ }
 
+      {/* content */ }
       <div
         className={`content${open ? " open" : ""}`}
         style={{ "--fade-delay": `${delay}s` }}
@@ -55,7 +58,7 @@ export default function ProjectContent(props) {
           >
             <ExternalLink size={18} />
           </button>
-          {/* ✨ add more icons here later */}
+          {/* add more icons here later like for github or something*/}
         </div>
 
         {/* collapsible horizontal demo */}

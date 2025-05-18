@@ -1,4 +1,4 @@
-import './Projects.css';
+import './Timeline.css';
 import Timeline from './Timeline';
 
 export default function Projects() {
