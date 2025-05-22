@@ -15,7 +15,7 @@ export default function Saiborg() {
        transition={{ duration: 1 /* seconds */ }}
     >
       <div className="name">
-        <p className="jersey">Saiborg</p>
+        <p className="jersey">June</p>
       </div>
 
       <div className="canvas-container">
