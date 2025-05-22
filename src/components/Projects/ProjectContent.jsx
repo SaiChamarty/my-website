@@ -32,6 +32,10 @@ export default function ProjectContent(props) {
     if (shiftOnOpen && notifyShift) notifyShift(open);
   }, [open, shiftOnOpen, notifyShift]);
 
+  /* pakodi */
+  /* pakodi */
+  /* pakodi */
+
   return (
     <div className="timeline-item">
       {/* For every timeline item, there is a marker (circle), and then a branch, and then the content (either open or closed) */}

@@ -20,7 +20,7 @@ export default function Timeline() {
 
   return (
     <div>
-      {/* This is the singular marker all the way at the top */}
+      {/* This is the singular marker all the way at the top, pakodi */}
       <div className="marker" />
 
       <div className={`timeline${shift ? " timeline--shift" : ""}`}>
