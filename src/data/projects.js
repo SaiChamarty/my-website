@@ -4,30 +4,22 @@ import HandwrittenDemo from "../demos/HandwrittenDemo.jsx";   // example
 
 export const projectDict = {
   "Handwritten Recognition": {
-    description: "CNN + Flask server for live digit prediction.",
+    description: "Logistic Regression + Flask server for live digit prediction.",
     demo: HandwrittenDemo,          // ⬅ inline component shown/hidden
     // OR: onDemo: () => window.open("https://ml.junebase.com", "_blank")
     shiftOnOpen: true                 // ← makes Timeline slide 40 %
   },
 
-  "Graphing Calculator": {
-    description: "graphing calculator!",
-    onDemo: () => alert("Custom handler just for this card!")
-  },
-
-  "Saiborg": {
-    description: "Saiborg!",
-    onDemo: () => alert("Custom handler just for this card!")
+  "ML Scenery Classification": {
+    description: "Multi model classification over Intel dataset on sceneries.",
+    onDemo: () => window.open("https://model28.junebase.com", "_blank"),
+    shiftOnOpen: true
   },
 
   "Teachers Pet": {
-    description: "Teachers Pet!",
-    onDemo: () => alert("Custom handler just for this card!")
-  },
-
-  "Obstacle Avoiding Robot": {
-    description: "Obstacle Avoiding Robot!",
-    onDemo: () => alert("Custom handler just for this card!")
+    description: "Office hours management application",
+    onDemo: () => window.open("https://github.com/macintAsh1984/TeachersPet"),
+    shiftOnOpen: true
   }
   // …add more
 };
