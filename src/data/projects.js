@@ -3,10 +3,10 @@
 import HandwrittenDemo from "../demos/HandwrittenDemo.jsx";   // example
 
 export const projectDict = {
-  "Handwritten Recognition": {
-    description: "CNN + Flask server for live digit prediction.",
-    demo: HandwrittenDemo,          // ⬅ inline component shown/hidden
-    // OR: onDemo: () => window.open("https://ml.junebase.com", "_blank")
+  "Handwritten Digit Recognition": {
+    description: "CNN model for predicting handwritten digits from 0-9 with 95% accuracy",
+    // demo: HandwrittenDemo,          // ⬅ inline component shown/hidden
+    onDemo: () => window.open("https://ml.junebase.com", "_blank"),
     shiftOnOpen: true                 // ← makes Timeline slide 40 %
   },
 
@@ -17,7 +17,7 @@ export const projectDict = {
   },
 
   "Teachers Pet": {
-    description: "Office hours management application",
+    description: "Office hours management iOS application",
     onDemo: () => window.open("https://github.com/macintAsh1984/TeachersPet"),
     shiftOnOpen: true
   }

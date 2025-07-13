@@ -211,7 +211,7 @@
 /* make your card a column‑flex box that truly centers its children */
 .content {
   /* fixed size or min‑size to your taste */
-  width: 12rem;
+  width: 20rem;
   min-height: 6rem;
   opacity: 0; /* Now fade & slide the content in after the branch is done */
 
