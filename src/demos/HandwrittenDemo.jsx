@@ -16,9 +16,12 @@ export default function HandwrittenDemo() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx    = canvas.getContext("2d");
-    ctx.lineWidth = 20;
+    ctx.lineWidth = 12;
     ctx.lineCap   = "round";
     ctx.strokeStyle = "white";
+    
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 
     let drawing = false;
     const xy = e => {
@@ -28,7 +31,7 @@ export default function HandwrittenDemo() {
 
     const down = e => { drawing = true; ctx.beginPath(); ctx.moveTo(...Object.values(xy(e))); };
     const move = e => { if (!drawing) return; const {x,y}=xy(e); ctx.lineTo(x,y); ctx.stroke(); };
-    const up   = () => { drawing = false; ctx.closePath(); };
+    const up = () => { drawing = false; ctx.closePath(); ctx.beginPath(); };
 
     canvas.addEventListener("mousedown", down);
     canvas.addEventListener("mousemove", move);
@@ -53,7 +56,11 @@ export default function HandwrittenDemo() {
     // draw the upscale canvas onto a hidden 28×28 canvas
     const tmp   = document.createElement("canvas");
     tmp.width = tmp.height = GRID;
-    tmp.getContext("2d").drawImage(canvasRef.current, 0, 0, GRID, GRID);
+    const tctx = tmp.getContext("2d");
+    tctx.imageSmoothingEnabled = false;
+    tctx.fillStyle = "black";
+    tctx.fillRect(0, 0, GRID, GRID); // ✅ Fill with black first
+    tctx.drawImage(canvasRef.current, 0, 0, GRID, GRID);
 
     // grab grayscale pixels & normalise 0‑1
     const { data } = tmp.getContext("2d").getImageData(0, 0, GRID, GRID);
@@ -80,6 +87,7 @@ export default function HandwrittenDemo() {
     }
     
     console.timeEnd("predict-click");
+    document.body.appendChild(tmp);  // temporary preview
   };
 
   /* ---------- UI ---------- */

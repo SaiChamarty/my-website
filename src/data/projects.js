@@ -4,7 +4,7 @@ import HandwrittenDemo from "../demos/HandwrittenDemo.jsx";   // example
 
 export const projectDict = {
   "Handwritten Recognition": {
-    description: "Logistic Regression + Flask server for live digit prediction.",
+    description: "CNN + Flask server for live digit prediction.",
     demo: HandwrittenDemo,          // ⬅ inline component shown/hidden
     // OR: onDemo: () => window.open("https://ml.junebase.com", "_blank")
     shiftOnOpen: true                 // ← makes Timeline slide 40 %
