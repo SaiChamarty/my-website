@@ -24,15 +24,20 @@ export default function Timeline() {
       <div className="marker" />
 
       <div className={`timeline${shift ? " timeline--shift" : ""}`}>
-        {/* Then we have the project content branches for each of the projects from the data json file. */}
-        {projects.map((p, idx) => (
-          <ProjectContent
-            key={p.title}
-            index={idx}
-            notifyShift={setShift}        // ← pass setter down
-            {...p}          // title, description, demo, onDemo
-          />
-        ))}
+        {projects.map((p, idx) => {
+          // compute a delay, e.g. 0.1s per item
+          const delayBlock = `${idx * 0.2}s`;
+
+          return (
+            <ProjectContent
+              key={p.title}
+              index={idx}
+              notifyShift={setShift}
+              delayBlock={delayBlock}     // <-- pass it down
+              {...p}
+            />
+          );
+        })}
       </div>
     </div>
   );

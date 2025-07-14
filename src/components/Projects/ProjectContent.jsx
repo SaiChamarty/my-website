@@ -14,6 +14,7 @@ export default function ProjectContent(props) {
     onDemo,
     shiftOnOpen = false,     // ← new flag (only true for handwriting card)
     notifyShift,             // ← callback from Timeline
+    delayBlock,
     index
   } = props;
 
@@ -37,7 +38,10 @@ export default function ProjectContent(props) {
   /* pakodi */
 
   return (
-    <div className="timeline-item">
+    <div
+      className="timeline-item"
+      style={{ "--delay": delayBlock }}
+    >
       {/* For every timeline item, there is a marker (circle), and then a branch, and then the content (either open or closed) */}
       <div className="marker" /> {/* circle */ }
       <div className="branch" /> {/* branch */ }

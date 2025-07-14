@@ -119,7 +119,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: #7cfc00;
+  color: #59b102;
 }
 
 /*--------------------------------BRANCH LINE CODE----------------------------------*/
@@ -144,50 +144,35 @@
   transform-origin: right center;
 }
 
-/* 2) odd boxes fade-in from the left (moving right) */
-.timeline-item:nth-child(odd) .content {
-  animation: fadeRight 0.6s ease-out forwards;
-  animation-delay: 0.5s; /* after branchGrow */
-  text-align: center;   /* center the text */
-}
-.timeline-item:nth-child(odd) {
-  flex-direction: row-reverse;
-}
-
-/* 3) even boxes fade-in from the right (moving left) */
+/* 1) common animation + centering for every .content */
+.timeline-item:nth-child(odd)  .content,
 .timeline-item:nth-child(even) .content {
-  animation: fadeLeft 0.6s ease-out forwards;
+  animation-duration: 0.6s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
   animation-delay: 0.5s;
-  margin-right: 0;      /* make sure the other side is zero */
-  text-align: center;   /* center the text inside */
+  text-align: center;
 }
 
-/*————— flush-to-branch on load —————*/
+/* 2) pick the right fade based on odd/even */
+.timeline-item:nth-child(odd)  .content { animation-name: fadeRight; }
+.timeline-item:nth-child(even) .content { animation-name: fadeLeft;  }
 
-/* Even items live on the LEFT of the spine → lock their RIGHT edge at branch */
+/* 3) “flush to branch” margins */
+/* odd → sit to the right of the spine */
+.timeline-item:nth-child(odd)  .content {
+  margin-left:  calc(50% + var(--branch-length) + 1rem);
+  margin-right: auto;
+}
+/* even → sit to the left */
 .timeline-item:nth-child(even) .content {
-  margin-left: auto;   /* free left side */
+  margin-left: auto;
   margin-right: calc(50% + var(--branch-length) + 1rem);
 }
 
-/* Odd items live on the RIGHT of the spine → lock their LEFT edge at branch */
-.timeline-item:nth-child(odd) .content {
-  margin-left:  calc(50% + var(--branch-length) + 1rem);
-  margin-right: auto;  /* free right side */
-}
-
-/*————— grow-in-place on open —————*/
-
-/* Even opens should expand LEFT, so keep the right-lock, free the left */
-.timeline-item:nth-child(even) .content.open {
-  margin-left: auto !important;
-  margin-right: calc(50% + var(--branch-length) + 1rem) !important;
-}
-
-/* Odd opens should expand RIGHT, so keep the left-lock, free the right */
-.timeline-item:nth-child(odd) .content.open {
-  margin-left: calc(50% + var(--branch-length) + 1rem) !important;
-  margin-right: auto !important;
+/* 4) flip the flex order for odd items */
+.timeline-item:nth-child(odd) {
+  flex-direction: row-reverse;
 }
 
 /* match the length of your static offset */
@@ -262,44 +247,81 @@
   }
 }
 
+/* 1) define fadeDown (starts 30px above, then drops into place) */
+@keyframes fadeDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /*--------------------------------MOBILE CODE START----------------------------------*/
 @media (max-width: 600px) {
-  /* hide the rail graphics */
-  .marker,
-  .branch,
-  .timeline::before {
-    display: none;
-  }
+  /* === MOBILE (≤ 600 px) – vertical-rail layout ===================== */
 
-  .timeline {
-    padding: 4rem 0;
-    width: 90%;
-    max-width: 600px;
-    margin: 0 auto;
-  }
+  /* 1. kill only the side arms */
+  .branch, .marker { display: none; }
+
+  /* 3) stack & center your cards under that rail */
   .timeline-item {
-    display: block;
-    margin: 2rem 0;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .content {
+    margin: 1rem auto !important;
+    width: calc(100% - 2rem) !important;
+    text-align: left;
   }
 
-  .content {
-    width: calc(100% - 2rem);
-    margin: 0 auto;
-    padding: 1rem;
-    box-sizing: border-box;
+  .timeline   { position: relative; }
+  .timeline::before { z-index: -1 !important; }
+  .timeline-item .content {
+    position: relative;
+    background:#1a1a1a !important;
+    z-index: 1 !important;
+  }
 
-    /* left-border as your “rail” */
-    border-left: 4px solid #7CFC00;
+  /* 2) if you still see desktop nth-child rules, neutralize them */
+  .timeline-item:nth-child(odd)  .content,
+  .timeline-item:nth-child(even) .content {
+    animation-name: fadeDown !important;
+    animation-delay: var(--delay, 0s);
+  }
 
-    background: rgba(255,255,255,0.1);
-    border-radius: 0.5rem;
-    text-align: left;
+  /* 1) force a single‐column layout for every item */
+  .timeline-item,
+  .timeline-item:nth-child(odd),
+  .timeline-item:nth-child(even) {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start; /* or center, if you prefer */
+  }
 
-    /* entrance animation using our CSS variable */
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 0.6s ease-out forwards;
-    animation-delay: var(--fade-delay, 0s);
+  /* 2) reset all the odd/even margins so cards just stack under the rail */
+  .timeline-item .content {
+    margin: 0 auto !important;
+    width: calc(100% - 2rem); /* or whatever your mobile width is */
+  }
+
+  /* 3) (optional) if you’d rather block‐render, you can ditch flex entirely: */
+  .timeline-item { display: block !important; 
+  }
+
+  /* make the clickable target larger */
+  .demo-btn {
+    padding: 0rem 0.5rem;    /* more breathing room */
+    border-radius: 0.4rem;     /* slightly rounder corners */
+  }
+
+  /* enlarge the lucide-react <svg> icon inside the button */
+  .demo-btn svg {
+    width: 2rem;              /* default is ~1em; tweak to taste */
+    height: 2rem;
   }
 }
 /*--------------------------------MOBILE CODE END----------------------------------*/
