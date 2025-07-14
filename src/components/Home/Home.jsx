@@ -16,7 +16,7 @@ function Home() {
         </div>
         <div className={styles.description}>
           <AnimatedText
-            text="I am an engineer passionate about App development and Machine Learning."
+            text="I am an undergraduate student passionate about App development and Machine Learning."
             baseDelay={1}
             letterDelay={0}    // no per-letter staggering
             duration={0.5}     // faster overall

@@ -23,9 +23,12 @@ export default function Navbar() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // close the mobile menu on any click
+  const closeMenu = () => setIsOpen(false);
+
   const listItems = products.map(product => (
     <li key={product.id} className="nav-item">
-      <Link to={product.source} className="nav-link">
+      <Link to={product.source} className="nav-link" onClick={closeMenu} >
         {product.title}
       </Link>
     </li>
