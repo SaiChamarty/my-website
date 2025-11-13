@@ -1,4 +1,4 @@
-name: 🚀 Auto-Deploy to junebase Server
+name: 🚀 Auto-Deploy Club Website to junebase Server
 
 on:
   push:
@@ -16,18 +16,20 @@ jobs:
       - name: 🔐 Set up SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          echo "${{ secrets.SERVER }}" > ~/.ssh/saigithub
+          chmod 600 ~/.ssh/saigithub
+          ssh-keyscan -p 2250 junebase.com >> ~/.ssh/known_hosts
 
       - name: 🚀 Deploy to Server
         run: |
-          ssh -p 2250 saichamarty@junebase.com << 'EOF'
-            cd ~/website/PersonalWebsite
+          ssh -i ~/.ssh/saigithub -p 2250 sai@junebase.com << 'EOF'
+            cd ~/Documents/websites/my-website
             git pull origin main
             npm install
             npm run build
+
             sudo rm -rf /var/www/sai/*
             sudo cp -r build/* /var/www/sai/
             sudo chown -R www-data:www-data /var/www/sai
+            sudo systemctl restart apache2
           EOF
