@@ -17,11 +17,71 @@ body {
 
 /* HERO WRAPPER */
 .Text {
+  position: relative;   /* NEW */
+  z-index: 1;           /* NEW */
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 30vh;
-  padding-bottom: 7vh; /* add breathing room before next section */
+  padding-bottom: 7vh;
+}
+
+/* LEFT SIDE IMAGE (robot) */
+.topRobot {
+  position: absolute;
+  left: -6vw;
+  top: -4vh;
+
+  width: 58vw;
+  height: auto;
+
+  opacity: 0.32;
+  z-index: 1;
+  pointer-events: none;
+
+  /* fade ALL edges, plus stronger fade toward center (right side) */
+  -webkit-mask-image:
+    linear-gradient(to right, black 0%, black 62%, transparent 92%),
+    linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%),
+    radial-gradient(circle at 40% 40%, black 0%, black 60%, transparent 92%);
+  -webkit-mask-composite: intersect;
+  mask-composite: intersect;
+
+  mask-image:
+    linear-gradient(to right, black 0%, black 62%, transparent 92%),
+    linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%),
+    radial-gradient(circle at 40% 40%, black 0%, black 60%, transparent 92%);
+
+  filter: blur(0.25px);
+}
+
+/* RIGHT SIDE IMAGE (you) */
+.topMe {
+  position: absolute;
+  right: -6vw;
+  top: -4vh;
+
+  width: 58vw;
+  height: auto;
+
+  opacity: 0.24; /* keep you quieter than robot */
+  z-index: 1;
+  pointer-events: none;
+
+  /* fade ALL edges, plus stronger fade toward center (left side) */
+  -webkit-mask-image:
+    linear-gradient(to left, black 0%, black 62%, transparent 92%),
+    linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%),
+    radial-gradient(circle at 60% 40%, black 0%, black 60%, transparent 92%);
+  -webkit-mask-composite: intersect;
+  mask-composite: intersect;
+
+  mask-image:
+    linear-gradient(to left, black 0%, black 62%, transparent 92%),
+    linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%),
+    radial-gradient(circle at 60% 40%, black 0%, black 60%, transparent 92%);
+
+  filter: blur(0.35px);
 }
 
 .intro {
@@ -51,6 +111,13 @@ body {
   max-width: 80vw;
   margin: 0 auto;
   padding: 0;
+}
+
+.intro,
+.name,
+.description {
+  position: relative;
+  z-index: 3;
 }
 
 .animclip {
@@ -324,5 +391,148 @@ body {
 @media (max-width: 520px) {
   .workGrid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .topRobot {
+    display: none;
+  }
+
+  .topMe {
+    left: 50%;
+    right: auto;
+    top: 18px;
+    transform: translateX(-50%);
+
+    width: min(92vw, 520px);
+    opacity: 0.30; /* slightly stronger on mobile */
+  }
+
+  /* remove the black background pill behind the name on mobile */
+  .name {
+    background: transparent;
+    padding: 0;
+  }
+}
+
+/* ===== Large screens: scale typography + spacing ===== */
+@media (min-width: 1400px) {
+  .Text {
+    padding-top: 26vh;
+    padding-bottom: 10vh;
+  }
+
+  .intro {
+    font-size: clamp(1.2rem, 1.6vw, 2.4rem);
+  }
+
+  .name {
+    font-size: clamp(3rem, 4.6vw, 6.2rem);
+  }
+
+  .description {
+    font-size: clamp(1.1rem, 1.5vw, 1.9rem);
+    width: min(920px, 62vw);
+  }
+
+  .section {
+    width: min(1320px, 92vw);
+    padding: 56px 0;
+  }
+
+  .sectionTitle {
+    font-size: clamp(1.05rem, 1.2vw, 1.45rem);
+    margin-bottom: 22px;
+  }
+
+  .workGrid {
+    gap: 18px;
+  }
+
+  .workCard {
+    padding: 18px 16px;
+  }
+
+  .workTitle {
+    font-size: 0.84rem;
+  }
+
+  .workDesc {
+    font-size: 1.05rem;
+  }
+
+  .card {
+    height: 360px;
+    max-width: 620px;
+  }
+
+  .cards {
+    gap: 28px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .Text {
+    padding-top: 24vh;
+  }
+
+  .section {
+    width: min(1480px, 92vw);
+  }
+
+  .card {
+    height: 390px;
+    max-width: 680px;
+  }
+}
+
+/* ===== Entrance animations ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateX(18px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeRight {
+  from { opacity: 0; transform: translateX(-18px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.enterUp {
+  opacity: 0;
+  animation: fadeUp 700ms cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+}
+
+.enterLeft {
+  opacity: 0;
+  animation: fadeRight 700ms cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+}
+
+.enterRight {
+  opacity: 0;
+  animation: fadeLeft 700ms cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+}
+
+.enterDown {
+  opacity: 0;
+  animation: fadeDown 650ms cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .enterUp, .enterLeft, .enterRight, .enterDown {
+    opacity: 1;
+    animation: none;
+    transform: none;
   }
 }

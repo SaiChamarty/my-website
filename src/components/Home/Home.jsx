@@ -19,6 +19,18 @@ function Home() {
     <div className={styles.App}>
       {/* HERO */}
       <div className={styles.Text}>
+        <img
+          className={styles.topRobot}
+          src="/top_robot.jpg"
+          alt=""
+          aria-hidden="true"
+        />
+        <img
+          className={styles.topMe}
+          src="/me.jpg"
+          alt=""
+          aria-hidden="true"
+        />
         <div className={styles.intro}>
           <AnimatedText text="Hey there! I'm" />
         </div>
@@ -41,32 +53,36 @@ function Home() {
       </div>
 
       {/* WHAT I WORK ON */}
-      <section className={styles.section} aria-label="What I work on">
+      <section
+        className={`${styles.section} ${styles.enterUp}`}
+        style={{ animationDelay: "1.35s" }}
+        aria-label="What I work on"
+      >
         <h2 className={styles.sectionTitle}>What I work on</h2>
 
         <div className={styles.workGrid}>
-          <div className={styles.workCard}>
+          <div className={`${styles.workCard} ${styles.enterUp}`} style={{ animationDelay: "1.50s" }}>
             <div className={styles.workTitle}>Perception & Stereo Vision</div>
             <div className={styles.workDesc}>
               Depth, tracking, calibration-minded CV workflows.
             </div>
           </div>
 
-          <div className={styles.workCard}>
+          <div className={`${styles.workCard} ${styles.enterUp}`} style={{ animationDelay: "1.50s" }}>
             <div className={styles.workTitle}>Robotics Compute & Server Deployment</div>
             <div className={styles.workDesc}>
               Linux servers, remote dev, GPU workflows, hosting.
             </div>
           </div>
 
-          <div className={styles.workCard}>
+          <div className={`${styles.workCard} ${styles.enterUp}`} style={{ animationDelay: "1.50s" }}>
             <div className={styles.workTitle}>App Development</div>
             <div className={styles.workDesc}>
               Tools and interfaces that connect humans to systems.
             </div>
           </div>
 
-          <div className={styles.workCard}>
+          <div className={`${styles.workCard} ${styles.enterUp}`} style={{ animationDelay: "1.50s" }}>
             <div className={styles.workTitle}>Web Development & Hosting</div>
             <div className={styles.workDesc}>
               Portfolio + project sites, deployment, reliability.
@@ -76,14 +92,19 @@ function Home() {
       </section>
 
       {/* FEATURED PROJECTS */}
-      <section className={styles.section} aria-label="Featured projects">
+      <section
+        className={`${styles.section} ${styles.enterUp}`}
+        style={{ animationDelay: "1.95s" }}
+        aria-label="Featured projects"
+      >
         <h2 className={styles.sectionTitle}>Featured Projects</h2>
 
         <div className={styles.cards}>
           {/* CARD 1 - JUNEBBASE */}
           <button
             type="button"
-            className={`${styles.card} ${openId === "junebase" ? styles.flipped : ""}`}
+            className={`${styles.card} ${styles.enterLeft} ${openId === "junebase" ? styles.flipped : ""}`}
+            style={{ animationDelay: "2.10s" }}
             onClick={() => toggle("junebase")}
           >
             <div className={styles.cardInner}>
@@ -143,7 +164,8 @@ function Home() {
           {/* CARD 2 - U-NET */}
           <button
             type="button"
-            className={`${styles.card} ${openId === "unet" ? styles.flipped : ""}`}
+            className={`${styles.card} ${styles.enterRight} ${openId === "unet" ? styles.flipped : ""}`}
+            style={{ animationDelay: "2.18s" }}
             onClick={() => toggle("unet")}
           >
             <div className={styles.cardInner}>
@@ -199,7 +221,7 @@ function Home() {
           </button>
         </div>
 
-        <a className={styles.moreLink} href="/projects">
+        <a className={`${styles.moreLink} ${styles.enterUp}`} style={{ animationDelay: "2.30s" }} href="/projects">
           To see more of my projects, click here →
         </a>
       </section>
