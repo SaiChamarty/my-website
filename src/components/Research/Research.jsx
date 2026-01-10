@@ -49,7 +49,7 @@ const RESEARCH_ITEMS = [
 ];
 
 export default function Research() {
-  const [openId, setOpenId] = useState(RESEARCH_ITEMS[0]?.id ?? null);
+  const [openId, setOpenId] = useState(null);
   const contentRefs = useRef({});
 
   useEffect(() => {
