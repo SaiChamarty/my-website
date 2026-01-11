@@ -12,11 +12,39 @@ nav.navbar {
   align-items: center;
 }
 
+/* Left cluster: logo + resume */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 /* Logo */
 .navbar-inner .logo {
   width: 70px;
   height: 70px;
   padding: 10px;
+}
+
+.resume-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(51, 173, 59, 0.5);
+  background: rgba(51, 173, 59, 0.12);
+  color: #b2ffbb;
+  font-family: 'Jersey 10', sans-serif;
+  font-size: 1.1rem;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.resume-button:hover {
+  transform: translateY(-1px);
+  background: rgba(51, 173, 59, 0.22);
 }
 
 /* ====== Desktop ====== */
@@ -67,6 +95,10 @@ nav.navbar {
   }
   .nav-links {
     display: none;
+  }
+  .resume-button {
+    padding: 8px 12px;
+    font-size: 0.95rem;
   }
 }
 

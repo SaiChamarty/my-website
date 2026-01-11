@@ -39,7 +39,17 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-inner">
-        <img src="logoo.png" alt="Logo" className="logo" />
+        <div className="nav-left">
+          <img src="logoo.png" alt="Logo" className="logo" />
+          <a
+            className="resume-button"
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View resume
+          </a>
+        </div>
 
         {/* Desktop Links */}
         <div className="nav-links">
