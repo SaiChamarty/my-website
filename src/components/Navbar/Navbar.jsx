@@ -47,15 +47,22 @@ export default function Navbar() {
         </div>
 
         {/* Hamburger for mobile */}
-        <div className="hamburger" onClick={toggleMenu}>
+        <button
+          type="button"
+          className="hamburger"
+          onClick={toggleMenu}
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
+          aria-label="Toggle navigation"
+        >
           <div className="hamburger-line" />
           <div className="hamburger-line" />
           <div className="hamburger-line" />
-        </div>
+        </button>
       </div>
 
       {/* Mobile slide-out menu (always in the DOM, but height‐clipped) */}
-      <div className={`mobile-menu ${isOpen ? 'open' : ''}`}>
+      <div id="mobile-menu" className={`mobile-menu ${isOpen ? 'open' : ''}`}>
         <ul>{listItems}</ul>
       </div>
     </nav>

@@ -7,6 +7,7 @@ import Saiborg from './components/Saiborg/Saiborg';
 import About from './components/About/About';
 import Notfound from './components/Notfound/Notfound'; // Your custom 404 component
 import Research from './components/Research/Research';
+import Footer from './components/Footer/Footer';
 
 
 function App() {
@@ -14,15 +15,18 @@ function App() {
     <BrowserRouter>
       <div className='App'>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/research" element={<Research />} />
-          <Route path="/saiborg" element={<Saiborg />} />
-          <Route path="/about" element={<About />} />
-          {/* Catch-all route for unknown paths */}
-          <Route path="*" element={<Notfound />} />
-        </Routes>
+        <div className="page-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/research" element={<Research />} />
+            <Route path="/saiborg" element={<Saiborg />} />
+            <Route path="/about" element={<About />} />
+            {/* Catch-all route for unknown paths */}
+            <Route path="*" element={<Notfound />} />
+          </Routes>
+        </div>
+        <Footer />
       </div>
     </BrowserRouter>
   );

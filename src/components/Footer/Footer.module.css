@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jockey+One&display=swap');
+
+.footer {
+  width: 100%;
+  padding: 3rem 1.5rem 2rem;
+  background: #000;
+  color: antiquewhite;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.heading {
+  font-family: 'Jersey 10', sans-serif;
+  color: #33AD3B;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom: 1.2rem;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+
+.links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(51, 173, 59, 0.25);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.links a:hover {
+  transform: translateY(-2px);
+  background: rgba(51, 173, 59, 0.18);
+}
+
+.links img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.meta {
+  font-family: 'Jockey One', sans-serif;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.subtle {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}

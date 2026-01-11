@@ -1,12 +1,18 @@
 .App {
   /* make your container fill the screen... */
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 
   /* ...and hide any children outside its bounds */
 
   /* ensure it’s the clipping context */
   position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex: 1 0 auto;
 }
 
 html {

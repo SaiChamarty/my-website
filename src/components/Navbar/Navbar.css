@@ -48,6 +48,9 @@ nav.navbar {
   flex-direction: column;
   cursor: pointer;
   margin-right: 20px;
+  background: transparent;
+  border: none;
+  padding: 6px;
 }
 
 .hamburger .hamburger-line {
@@ -69,37 +72,45 @@ nav.navbar {
 
 /* Slide-out mobile menu */
 .mobile-menu {
-  position: absolute;   /* same as before */
-  top: 70px;
-  right: 20px;
-  overflow: hidden;     /* hide everything above the max-height */
-  max-height: 0;        /* start “closed” */
-  transition: 
-    max-height 0.3s ease-in-out,
-    opacity    0.2s ease-in-out;
-
-  opacity: 0;           /* and fade it out when closed */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.92);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  transition:
+    max-height 0.35s ease,
+    opacity 0.25s ease,
+    transform 0.35s ease;
   z-index: 9999;
 }
 
 /* when .open is present, allow content to show */
 .mobile-menu.open {
-  max-height: 300px;    /* big enough to fit all your links */
+  max-height: 320px;
   opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .mobile-menu ul {
   list-style: none;
-  padding: 10px 0;
+  padding: 12px 0 16px;
   margin: 0;
 }
 
 .mobile-menu .nav-link {
   display: block;
   width: 100%;
-  padding: 8px 0;
+  padding: 10px 0;
+  text-align: center;
 }
 
 .mobile-menu .nav-item {
-  margin: 10px 0; /* vertical spacing in mobile menu */
+  margin: 8px 0;
 }
