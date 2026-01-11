@@ -14,17 +14,17 @@
 /* Top-left Saiborg element (its positioning) */
 .name {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  top: 2rem;
+  left: clamp(0.5rem, 4vh, 4rem);
 }
 
 /* This is for the text "Saiborg" */
 .name p {
   font-family: 'Jersey 10', sans-serif;
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
   color: #33AD3B;
   margin: 0;
-  margin-left: 3rem;
 }
 
 /* Centered canvas for the rotating animation */

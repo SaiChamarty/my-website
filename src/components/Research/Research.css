@@ -2,8 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Jockey+One&display=swap');
 
 .research {
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding: 1rem 2rem 4rem clamp(0.5rem, 4vh, 4rem);
   animation: fadeIn 1s ease-out forwards;
 }
 
@@ -11,9 +10,9 @@
   color: #33AD3B;
   font-family: 'Jersey 10', sans-serif;
   font-size: clamp(2rem, 5vw, 3rem);
-  letter-spacing: 1;
+  letter-spacing: 0;
   font-weight: 300;
-  margin-bottom: 1.2rem;
+  margin: 2rem 0 1rem;
 }
 
 /* List container */

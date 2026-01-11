@@ -1,4 +1,5 @@
 /* src/components/Timeline.css */
+@import url("https://fonts.googleapis.com/css2?family=Jersey+10&display=swap");
 :root {
   /* tweak these two to control everything */
   --branch-length: 6rem;
@@ -11,6 +12,21 @@
   height: 100vh;
   /* ensure it’s the clipping context */
   position: relative;
+}
+
+.projects-page {
+  padding: 2.5rem 0 4rem;
+  background: #000;
+}
+
+.projects-title {
+  padding-left: clamp(1rem, 4vw, 3rem);
+  color: #33AD3B;
+  font-family: 'Jersey 10', sans-serif;
+  font-size: 2.5rem;
+  letter-spacing: 1;
+  font-weight: 300;
+  margin-bottom: 1.2rem;
 }
 
 /*pakodi*/
@@ -56,21 +72,6 @@
   display: flex;
   align-items: center;
   margin: 6rem 0;
-  cursor: pointer; /* Make the whole item clickable and change cursor */
-}
-
-/*------------------------content open-----------------------------*/
-
-.content.open {
-  display: flex;
-  flex-direction: row;
-  width: clamp(22rem, 40vw, 48rem);
-}
-
-.text-stack { flex: 1 1 auto; }
-.demo-wrapper {
-  flex: 0 0 70%;
-  margin-left: auto;
 }
 
 /* ---------- handwritten demo widget ---------- */
@@ -107,19 +108,27 @@
 }
 /* ------------------ end ----------------------- */
 
-/* ---------- icon bar bottom‑right ------------- */
-.icon-bar {
+/* ---------- timeline date label ------------- */
+.date-label {
   position: absolute;
-  bottom: 0.4rem;
-  right: 0.4rem;
-  display: flex;
-  gap: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 9rem;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: rgba(178, 255, 187, 0.7);
 }
-.demo-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #59b102;
+
+.timeline-item:nth-child(odd) .date-label {
+  right: calc(50% + 2rem);
+  text-align: right;
+}
+
+.timeline-item:nth-child(even) .date-label {
+  left: calc(50% + 2rem);
+  text-align: left;
 }
 
 /*--------------------------------BRANCH LINE CODE----------------------------------*/
@@ -147,10 +156,10 @@
 /* 1) common animation + centering for every .content */
 .timeline-item:nth-child(odd)  .content,
 .timeline-item:nth-child(even) .content {
-  animation-duration: 0.6s;
+  animation-duration: 0.45s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
-  animation-delay: 0.5s;
+  animation-delay: var(--fade-delay, 0.5s);
   text-align: center;
 }
 
@@ -195,23 +204,178 @@
 
 /* make your card a column‑flex box that truly centers its children */
 .content {
-  /* fixed size or min‑size to your taste */
-  width: 20rem;
-  min-height: 6rem;
+  width: clamp(20rem, 42vw, 34rem);
   opacity: 0; /* Now fade & slide the content in after the branch is done */
-
-  /* padding counts inside the box */
   box-sizing: border-box;
-  padding: 1rem;
-
-  /* center everything, stacked vertically */
   display: flex;
-  justify-content: center;  /* vertical centering */
-
+  justify-content: center;
   text-align: center;
-  background: rgba(255,255,255,0.1);
-  border-radius: 0.5rem;
+  background: transparent;
+}
+
+/*------------------------project cards-----------------------------*/
+.project-card {
+  width: 100%;
+  max-width: 520px;
+  height: 320px;
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  perspective: 1400px;
+}
+
+.project-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 22px;
+  transform-style: preserve-3d;
+  transition: transform 700ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.project-card.flipped .project-card-inner {
+  transform: rotateY(180deg);
+}
+
+.project-card-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  background: rgba(22, 22, 22, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.project-card-front {
   overflow: hidden;
+}
+
+.project-card-back {
+  transform: rotateY(180deg);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-card-paragraph {
+  margin: 0;
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(13px, 1.4vw, 15px);
+  line-height: 1.85;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  color: #d6d8db;
+}
+
+.project-card-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 70%;
+  border-radius: 22px;
+  display: block;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  filter: blur(0px);
+}
+
+.project-card-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 42px 22px 64px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.97) 0%,
+    rgba(0, 0, 0, 0.88) 28%,
+    rgba(0, 0, 0, 0.60) 55%,
+    rgba(0, 0, 0, 0.18) 80%,
+    rgba(0, 0, 0, 0.00) 100%
+  );
+  border-bottom-left-radius: 22px;
+  border-bottom-right-radius: 22px;
+}
+
+.project-card-name {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 1.05rem;
+  color: #f0f2f4;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.55);
+}
+
+.project-card-role {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: rgba(210, 214, 218, 0.95);
+  margin-bottom: -10px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.project-card-link {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: #1b1b1b;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.95rem;
+  text-decoration: none;
+  opacity: 0.92;
+  z-index: 5;
+}
+
+.project-card-action {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font-size: 1.45rem;
+  display: grid;
+  place-items: center;
+  z-index: 5;
+}
+
+.project-card-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.project-pill {
+  text-decoration: none;
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(178, 255, 187, 0.25);
+  color: #d6d8db;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 /*--------------------------- Fades animations ---------------------------------- */
@@ -265,6 +429,15 @@
 
   /* 1. kill only the side arms */
   .branch, .marker { display: none; }
+  .date-label {
+    position: static;
+    width: auto;
+    text-align: right;
+    margin: 0 0 0.6rem 0;
+    transform: none;
+    width: 100%;
+    padding-right: 0.6rem;
+  }
 
   /* 3) stack & center your cards under that rail */
   .timeline-item {
@@ -312,16 +485,13 @@
   .timeline-item { display: block !important; 
   }
 
-  /* make the clickable target larger */
-  .demo-btn {
-    padding: 0rem 0.5rem;    /* more breathing room */
-    border-radius: 0.4rem;     /* slightly rounder corners */
+  .project-card {
+    height: 280px;
+    max-width: 100%;
   }
 
-  /* enlarge the lucide-react <svg> icon inside the button */
-  .demo-btn svg {
-    width: 2rem;              /* default is ~1em; tweak to taste */
-    height: 2rem;
+  .project-card-name {
+    font-size: 0.95rem;
   }
 }
 /*--------------------------------MOBILE CODE END----------------------------------*/

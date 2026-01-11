@@ -106,6 +106,7 @@
   font-family: 'Jersey 10', sans-serif;
   color: #33AD3B;
   font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
   margin: 2rem 0 1rem;
   line-height: 1.2;
   letter-spacing: 0;
