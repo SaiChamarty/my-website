@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useCallback } from 'react';
 import styles from "./Home.module.css";
 
 const WORK_ITEMS = [
@@ -56,8 +56,19 @@ const MARQUEE_ITEMS = [
   "LINUX", "REACT", "SIMULATION", "PYTHON", "ROS", "HARDWARE",
 ];
 
+// Slide direction per window: 1=left, 2=right, 3=left
+const SLIDE_DIR = { 1: 'termWindowSlideTop', 2: 'termWindowSlideRight', 3: 'termWindowSlideBottomRight' };
+
 export default function Home() {
   const [activeWin, setActiveWin] = useState(1);
+  const [focusingWin, setFocusingWin] = useState(null);
+
+  const handleWinClick = useCallback((winNum) => {
+    if (winNum !== activeWin) {
+      setFocusingWin(winNum);
+    }
+    setActiveWin(winNum);
+  }, [activeWin]);
 
   return (
     <div className={styles.app}>
@@ -105,8 +116,9 @@ export default function Home() {
 
           {/* Window 1 — Perception Pipeline */}
           <div
-            className={`${styles.termWindow} ${styles.termWin1} ${activeWin === 1 ? styles.termWindowActive : styles.termWindowInactive}`}
-            onClick={() => setActiveWin(1)}
+            className={`${styles.termWindow} ${styles.termWin1} ${activeWin === 1 ? styles.termWindowActive : styles.termWindowInactive}${focusingWin === 1 ? ` ${styles[SLIDE_DIR[1]]}` : ''}`}
+            onClick={() => handleWinClick(1)}
+            onAnimationEnd={() => { if (focusingWin === 1) setFocusingWin(null); }}
             style={{ zIndex: activeWin === 1 ? 10 : 1 }}
           >
             <div className={styles.termHeader}>
@@ -172,8 +184,9 @@ export default function Home() {
 
           {/* Window 2 — Isaac Sim */}
           <div
-            className={`${styles.termWindow} ${styles.termWin2} ${activeWin === 2 ? styles.termWindowActive : styles.termWindowInactive}`}
-            onClick={() => setActiveWin(2)}
+            className={`${styles.termWindow} ${styles.termWin2} ${activeWin === 2 ? styles.termWindowActive : styles.termWindowInactive}${focusingWin === 2 ? ` ${styles[SLIDE_DIR[2]]}` : ''}`}
+            onClick={() => handleWinClick(2)}
+            onAnimationEnd={() => { if (focusingWin === 2) setFocusingWin(null); }}
             style={{ zIndex: activeWin === 2 ? 10 : 2 }}
           >
             <div className={styles.termHeader}>
@@ -206,8 +219,9 @@ export default function Home() {
 
           {/* Window 3 — SSH / Linux */}
           <div
-            className={`${styles.termWindow} ${styles.termWin3} ${activeWin === 3 ? styles.termWindowActive : styles.termWindowInactive}`}
-            onClick={() => setActiveWin(3)}
+            className={`${styles.termWindow} ${styles.termWin3} ${activeWin === 3 ? styles.termWindowActive : styles.termWindowInactive}${focusingWin === 3 ? ` ${styles[SLIDE_DIR[3]]}` : ''}`}
+            onClick={() => handleWinClick(3)}
+            onAnimationEnd={() => { if (focusingWin === 3) setFocusingWin(null); }}
             style={{ zIndex: activeWin === 3 ? 10 : 1 }}
           >
             <div className={styles.termHeader}>

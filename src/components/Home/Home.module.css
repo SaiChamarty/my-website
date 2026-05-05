@@ -221,10 +221,33 @@
   pointer-events: none;
 }
 
-.cornerTL { top: 14px; left: 14px; border-right: none; border-bottom: none; }
-.cornerTR { top: 14px; right: 14px; border-left: none; border-bottom: none; }
-.cornerBL { bottom: 14px; left: 14px; border-right: none; border-top: none; }
-.cornerBR { bottom: 14px; right: 14px; border-left: none; border-top: none; }
+.cornerTL {
+  top: 14px;
+  left: 14px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.cornerTR {
+  top: 14px;
+  right: 14px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.cornerBL {
+  bottom: 14px;
+  left: 14px;
+  border-right: none;
+  border-top: none;
+}
+
+.cornerBR {
+  bottom: 14px;
+  right: 14px;
+  border-left: none;
+  border-top: none;
+}
 
 /* Badge */
 .heroBadge {
@@ -606,12 +629,23 @@
 
 /* ── ANIMATIONS ── */
 @keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.85); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
 }
 
 @keyframes marquee {
-  to { transform: translateX(-50%); }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* ═══════════════════════════════════
@@ -620,7 +654,7 @@
 
 .termWindowsContainer {
   position: relative;
-  height: 510px;
+  height: 600px;
 }
 
 .termWindow {
@@ -631,8 +665,14 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  transition: opacity 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: opacity 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease, transform 0.3s ease;
   user-select: none;
+}
+
+.termWindow:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 32px rgba(34, 197, 94, 0.18), 0 8px 24px rgba(0, 0, 0, 0.3);
+  border-color: rgba(34, 197, 94, 0.5);
 }
 
 .termWindowActive {
@@ -641,35 +681,98 @@
   box-shadow: 0 0 28px rgba(34, 197, 94, 0.14);
 }
 
+.termWindowActive:hover {
+  box-shadow: 0 0 36px rgba(34, 197, 94, 0.22), 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
 .termWindowInactive {
   border: 1px solid rgba(34, 197, 94, 0.15);
   opacity: 0.6;
 }
 
+.termWindowInactive:hover {
+  opacity: 0.85;
+}
+
 .termWin1 {
-  width: 76%;
+  width: 88%;
   top: 0;
   left: 0;
   animation: termWinFloat 4.2s ease-in-out infinite;
 }
 
 .termWin2 {
-  width: 74%;
+  width: 86%;
   top: 38px;
   right: 0;
   animation: termWinFloat 3.8s ease-in-out infinite 1.4s;
 }
 
 .termWin3 {
-  width: 78%;
+  width: 90%;
   bottom: 14px;
   left: 8%;
   animation: termWinFloat 4.6s ease-in-out infinite 0.7s;
 }
 
 @keyframes termWinFloat {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes termSlideFromTop {
+  0% {
+    transform: translateY(-40px) scale(0.99);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes termSlideFromRight {
+  0% {
+    transform: translateX(50px) scale(0.99);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes termSlideFromBottomRight {
+  0% {
+    transform: translate(40px, 30px) scale(0.99);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+.termWindowSlideTop {
+  animation: termSlideFromTop 2.2s cubic-bezier(0.25, 0, 0, 1) forwards;
+}
+
+.termWindowSlideRight {
+  animation: termSlideFromRight 2.2s cubic-bezier(0.25, 0, 0, 1) forwards;
+}
+
+.termWindowSlideBottomRight {
+  animation: termSlideFromBottomRight 2.2s cubic-bezier(0.25, 0, 0, 1) forwards;
 }
 
 /* Header */
@@ -695,9 +798,17 @@
   border-radius: 50%;
 }
 
-.dotRed    { background: #ff5f57; }
-.dotYellow { background: #febc2e; }
-.dotGreen  { background: #28c840; }
+.dotRed {
+  background: #ff5f57;
+}
+
+.dotYellow {
+  background: #febc2e;
+}
+
+.dotGreen {
+  background: #28c840;
+}
 
 .termFilename {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
@@ -724,8 +835,15 @@
   transform: translate(-50%, -50%);
 }
 
-.orbitOuter { width: 148px; height: 148px; }
-.orbitInner { width: 80px;  height: 80px;  }
+.orbitOuter {
+  width: 148px;
+  height: 148px;
+}
+
+.orbitInner {
+  width: 80px;
+  height: 80px;
+}
 
 .orbitCore {
   position: absolute;
@@ -767,8 +885,17 @@
   animation: spinCCW 3.5s linear infinite;
 }
 
-@keyframes spinCW  { to { transform: rotate(360deg);  } }
-@keyframes spinCCW { to { transform: rotate(-360deg); } }
+@keyframes spinCW {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinCCW {
+  to {
+    transform: rotate(-360deg);
+  }
+}
 
 .orbitDotLg,
 .orbitDotSm {
@@ -824,8 +951,15 @@
 }
 
 @keyframes termFadeIn {
-  from { opacity: 0; transform: translateX(-5px); }
-  to   { opacity: 1; transform: translateX(0);    }
+  from {
+    opacity: 0;
+    transform: translateX(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .termCursor {
@@ -835,8 +969,15 @@
 }
 
 @keyframes cursorBlink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
 /* Skill bars */
@@ -882,7 +1023,9 @@
 }
 
 @keyframes barGrow {
-  to { transform: scaleX(1); }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .skillPct {
@@ -928,8 +1071,15 @@
 }
 
 @keyframes badgePillFloat {
-  0%, 100% { transform: translateY(0);   }
-  50%       { transform: translateY(-6px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 .badgePulseDot {
@@ -952,8 +1102,17 @@
 }
 
 @keyframes termDotPulse {
-  0%, 100% { opacity: 1; transform: scale(1);    }
-  50%       { opacity: 0.4; transform: scale(0.85); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
 }
 
 /* ── RESPONSIVE ── */
@@ -965,7 +1124,7 @@
   }
 
   .termWindowsContainer {
-    height: 440px;
+    height: 520px;
     max-width: 520px;
     margin: 0 auto;
     width: 100%;
@@ -999,19 +1158,23 @@
   .heroStats {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .statItem:nth-child(3) {
     border-right: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .badgeDot,
   .nowDot {
     animation: none;
   }
+
   .marqueeTrack {
     animation: none;
   }
+
   .workCard,
   .featCard {
     transition: none;
