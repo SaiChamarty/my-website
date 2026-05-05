@@ -19,7 +19,7 @@ const RESEARCH_ITEMS = [
     pdfSrc: "/model28.pdf",
   },
   {
-    id: "unet", // stable id (no spaces)
+    id: "unet",
     title: "U-Net Segmentation — Modern Optimizers and Modified Architecture",
     description: "Comparison of the original U-Net vs a modified U-Net using modern optimizers and normalization.",
     team: "Sai Chamarty, Jonathan Levitsky, Sambhav Agarwal",
@@ -33,19 +33,6 @@ const RESEARCH_ITEMS = [
     youtubeEmbed: "https://www.youtube.com/embed/fpBJSmlubyg",
     pdfSrc: "/unet.pdf",
   },
-
-  // Add your next research item here (example template)
-  // {
-  //   id: "unet",
-  //   title: "U-Net Segmentation — ...",
-  //   description: "...",
-  //   team: "...",
-  //   dateWritten: "...",
-  //   abstract: "...",
-  //   links: [{ label: "...", href: "...", icon: "/external-link.png" }],
-  //   youtubeEmbed: "", // optional
-  //   pdfSrc: "", // optional
-  // },
 ];
 
 export default function Research() {
@@ -53,91 +40,108 @@ export default function Research() {
   const contentRefs = useRef({});
 
   useEffect(() => {
-    // update heights after first paint (so animation is smooth)
-    const t = setTimeout(() => {
-      RESEARCH_ITEMS.forEach((item) => {
-        const el = contentRefs.current[item.id];
-        if (el) el.style.setProperty("--content-h", `${el.scrollHeight}px`);
-      });
-    }, 0);
-
-    // also update on resize
-    const onResize = () => {
+    const update = () => {
       RESEARCH_ITEMS.forEach((item) => {
         const el = contentRefs.current[item.id];
         if (el) el.style.setProperty("--content-h", `${el.scrollHeight}px`);
       });
     };
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      clearTimeout(t);
-      window.removeEventListener("resize", onResize);
-    };
+    const t = setTimeout(update, 0);
+    window.addEventListener("resize", update);
+    return () => { clearTimeout(t); window.removeEventListener("resize", update); };
   }, []);
 
   const toggle = (id) => setOpenId((prev) => (prev === id ? null : id));
 
   return (
-    <div className="research">
-      <h1 className="heading">Welcome to Sai's Research Page</h1>
+    <div className="research-page">
 
+      {/* ── PAGE HEADING ── */}
+      <div className="research-eyebrow">PAPERS &amp; WRITEUPS</div>
+      <h1 className="research-h1">
+        Research <span className="research-accent">&amp;</span>{" "}
+        <span className="research-serif">Findings</span>
+      </h1>
+      <p className="research-lead">
+        Academic papers, reimplementations, and comparative analyses from coursework and independent study.
+      </p>
+
+      {/* ── PAPER LIST ── */}
       <div className="research-list">
         {RESEARCH_ITEMS.map((item, index) => {
           const open = openId === item.id;
-
           return (
             <div
               key={item.id}
-              className={`research-item ${open ? "open" : ""} enter`}
+              className={`paper ${open ? "paper-open" : ""} paper-enter`}
               style={{ animationDelay: `${0.12 * index}s` }}
             >
+              {/* ── PAPER HEADER ── */}
               <button
                 type="button"
-                className="research-summary"
+                className="paper-head"
                 onClick={() => toggle(item.id)}
                 aria-expanded={open}
               >
-                <div className="research-summary-left">
-                  <div className="research-title">{item.title}</div>
-                  <div className="research-desc">{item.description}</div>
+                <div className="paper-head-left">
+                  <div className="paper-title">{item.title}</div>
+                  <div className="paper-sub">{item.description}</div>
+                  <div className="paper-meta-row">
+                    <span>
+                      <strong>Team:</strong> {item.team}
+                    </span>
+                    <span>
+                      <strong>Date:</strong> {item.dateWritten}
+                    </span>
+                  </div>
                 </div>
-                <div className="research-chevron" aria-hidden="true">
-                  {open ? "×" : "+"}
+                <div className="paper-head-right">
+                  {item.pdfSrc && (
+                    <a
+                      href={item.pdfSrc}
+                      className="open-pdf-btn"
+                      onClick={(e) => e.stopPropagation()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      ↗ PDF
+                    </a>
+                  )}
+                  <div className="paper-chevron" aria-hidden="true">
+                    {open ? "×" : "+"}
+                  </div>
                 </div>
               </button>
 
+              {/* ── PAPER BODY (expanded) ── */}
               <div
-                ref={(el) => {
-                  if (el) contentRefs.current[item.id] = el;
-                }}
-                className={`research-details ${open ? "open" : ""}`}
+                ref={(el) => { if (el) contentRefs.current[item.id] = el; }}
+                className={`paper-body ${open ? "paper-body-open" : ""}`}
               >
-                <div className="research-meta">
-                  <p><strong>Team:</strong> {item.team}</p>
-                  <p><strong>Date Written:</strong> {item.dateWritten}</p>
-                  <p><strong>Abstract:</strong> {item.abstract}</p>
+                <p className="paper-abstract">
+                  <strong>Abstract:</strong> {item.abstract}
+                </p>
 
-                  <div className="research-links">
-                    {item.links?.map((l) => (
-                      <a
-                        key={l.label}
-                        href={l.href}
-                        target={l.href.startsWith("http") ? "_blank" : undefined}
-                        rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="research-link"
-                        download={l.download ? true : undefined}
-                      >
-                        {l.icon ? <img src={l.icon} alt="" className="link-icon" /> : null}
-                        {l.label}
-                      </a>
-                    ))}
-                  </div>
+                <div className="paper-links">
+                  {item.links?.map((l) => (
+                    <a
+                      key={l.label}
+                      href={l.href}
+                      target={l.href.startsWith("http") ? "_blank" : undefined}
+                      rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="paper-link"
+                      download={l.download ? true : undefined}
+                    >
+                      {l.icon ? <img src={l.icon} alt="" className="paper-link-icon" /> : null}
+                      {l.label}
+                    </a>
+                  ))}
                 </div>
 
-                <div className="research-media">
+                <div className="paper-media">
                   {item.youtubeEmbed ? (
-                    <div className="video-placeholder">
+                    <div className="paper-frame paper-frame-video">
+                      <div className="paper-frame-label">DEMO VIDEO</div>
                       <iframe
                         width="100%"
                         height="100%"
@@ -146,28 +150,31 @@ export default function Research() {
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
-                      ></iframe>
+                      />
                     </div>
                   ) : null}
 
                   {item.pdfSrc ? (
-                    <div className="pdf-viewer">
-                      <div className="pdf-actions">
-                        <a className="open-pdf" href={item.pdfSrc} target="_blank" rel="noopener noreferrer">
-                          Open PDF ↗
-                        </a>
-                      </div>
-
-                      <iframe className="pdf-frame" src={item.pdfSrc} title={`${item.title} PDF`}></iframe>
+                    <div className="paper-frame paper-frame-pdf">
+                      <div className="paper-frame-label">PAPER</div>
+                      <iframe
+                        className="pdf-frame"
+                        src={item.pdfSrc}
+                        title={`${item.title} PDF`}
+                      />
                     </div>
                   ) : null}
                 </div>
 
-                {/* Mobile-only PDF download (if a download link exists) */}
-                <div className="download-row">
+                {/* Mobile-only PDF download */}
+                <div className="paper-mobile-download">
                   {item.links?.find((x) => x.download)?.href ? (
-                    <a className="download-pdf" href={item.links.find((x) => x.download).href} download>
-                      <img src="/download.png" alt="" className="link-icon" />
+                    <a
+                      className="paper-link"
+                      href={item.links.find((x) => x.download).href}
+                      download
+                    >
+                      <img src="/download.png" alt="" className="paper-link-icon" />
                       Download PDF
                     </a>
                   ) : null}

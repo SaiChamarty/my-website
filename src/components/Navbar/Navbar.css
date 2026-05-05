@@ -67,7 +67,31 @@ nav.navbar {
 
 .nav-link {
   text-decoration: none;
-  color: #4FA031;
+  color: var(--green);
+}
+
+/* ── LIGHT MODE — nav links & accents ── */
+[data-theme="light"] .nav-link {
+  color: #1a8a22;
+}
+
+[data-theme="light"] .hamburger .hamburger-line {
+  background-color: #1a8a22;
+}
+
+[data-theme="light"] .resume-button {
+  border-color: rgba(26, 138, 34, 0.5);
+  background: rgba(26, 138, 34, 0.10);
+  color: #0f6e17;
+}
+
+[data-theme="light"] .resume-button:hover {
+  background: rgba(26, 138, 34, 0.20);
+}
+
+[data-theme="light"] .mobile-menu {
+  background: rgba(253, 253, 245, 0.97);
+  border-top: 1px solid rgba(26, 138, 34, 0.15);
 }
 
 /* hide the hamburger by default */
@@ -84,7 +108,7 @@ nav.navbar {
 .hamburger .hamburger-line {
   width: 25px;
   height: 3px;
-  background-color: #4FA031;
+  background-color: var(--green);
   margin: 4px 0;
 }
 

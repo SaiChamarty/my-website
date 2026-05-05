@@ -1,36 +1,61 @@
-/* src/components/Timeline.css */
-@import url("https://fonts.googleapis.com/css2?family=Jersey+10&display=swap");
+/* ═══════════════════════════════════════════
+   PROJECTS PAGE — TIMELINE & CARDS
+   ═══════════════════════════════════════════ */
+
 :root {
-  /* tweak these two to control everything */
   --branch-length: 6rem;
   --branch-gap:    2rem;
 }
 
-.App {
-  /* make your container fill the screen... */
-  width: 100vw;
-  height: 100vh;
-  /* ensure it’s the clipping context */
-  position: relative;
+/* ── PAGE WRAPPER ── */
+.projects-page {
+  padding: 2.5rem clamp(1rem, 4vw, 3rem) 4rem;
+  min-height: 100vh;
 }
 
-.projects-page {
-  padding: 2.5rem 0 4rem;
-  background: #000;
+/* ── PAGE HEADING ── */
+.projects-eyebrow {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green-soft, #b2ffbb);
+  margin-bottom: 12px;
 }
 
 .projects-title {
-  padding-left: clamp(1rem, 4vw, 3rem);
-  color: #33AD3B;
-  font-family: 'Jersey 10', sans-serif;
-  font-size: 2.5rem;
-  letter-spacing: 1;
-  font-weight: 300;
-  margin-bottom: 1.2rem;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(2rem, 4.6vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--ink, #eaf1ec);
+  margin: 0 0 16px;
 }
 
-/*pakodi*/
-/*-----------------------------MAIN TIMELINE CODE ---------------------------*/
+.projects-title-accent {
+  color: var(--green, #33ad3b);
+}
+
+.projects-title-serif {
+  font-family: 'Instrument Serif', 'Times New Roman', serif;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink-2, #b6c2bb);
+  letter-spacing: -0.02em;
+}
+
+.projects-lead {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: clamp(1rem, 1.25vw, 1.18rem);
+  color: var(--ink-2, #b6c2bb);
+  margin: 0 0 2.5rem;
+  max-width: 60ch;
+}
+
+/* ══════════════════════════════════
+   MAIN TIMELINE
+   ══════════════════════════════════ */
 
 .timeline {
   position: relative;
@@ -38,35 +63,36 @@
   width: 90%;
   max-width: none;
   margin: 0 auto;
-  transform: translateY(1.5rem); /* this is for moving the timeline a tad bit down*/
-  --rail-offset: 0%;              /* default */
-  transition: --rail-offset 0.35s ease;   /* animates smoothly */
+  transform: translateY(1.5rem);
 }
 
-/*------This part is for the straight loading timeline-------*/ 
+/* ── SPINE LINE (thin, futuristic) ── */
 .timeline::before {
   content: '';
   position: absolute;
   left: 50%;
   top: 0;
   bottom: calc(6rem + 0.625rem + 4px);
-  width: 4px;
-  background: #7CFC00;           /* neon green */
-  transform-origin: top center;  /* pivot at the top */
-  transform: translateX(-50%) scaleY(0);
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--green, #33ad3b) 6%,
+    var(--green, #33ad3b) 94%,
+    transparent
+  );
+  transform: translateX(-0.5px);
+  box-shadow: 0 0 20px rgba(51, 173, 59, 0.35);
+  transform-origin: top center;
   animation: growLine 1s ease-out forwards;
 }
 
-
-/* animate only the rail */
 @keyframes growLine {
-  to {
-    transform: translateX(-50%) scaleY(1);
-  }
+  from { clip-path: inset(0 0 100% 0); }
+  to   { clip-path: inset(0 0 0% 0); }
 }
 
-/*------------------------end timeline load-----------------------------*/
-
+/* ── TIMELINE ITEM ── */
 .timeline-item {
   position: relative;
   display: flex;
@@ -74,51 +100,56 @@
   margin: 6rem 0;
 }
 
-/* ---------- handwritten demo widget ---------- */
-
-/*"Clear" and "Predict" buttons code*/
-.hdemo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-/* Button alignment */
-.hdemo-btns {
-  margin-top: 0.5rem;
-  display: flex;
-  gap: 0.5rem;
-}
-
-/* Buttons CSS design */
-.hdemo-btns button {
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.25rem;
-  border: 1px solid #7cfc00;
-  background: transparent;
-  color: #7cfc00;
-  cursor: pointer;
+/* ── DOT MARKER (on each item) ── */
+.marker {
+  position: absolute;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  background: var(--bg, #06080a);
+  border: 1.5px solid var(--green, #33ad3b);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow:
+    0 0 0 5px rgba(51, 173, 59, 0.14),
+    0 0 16px rgba(51, 173, 59, 0.5);
+  z-index: 2;
 }
 
-/* The canvas code */
-.hdemo-canvas {
-  border: 2px solid #7cfc00;
-  border-radius: 0.5rem;
-  background: black;
-  touch-action: none;           /* smoother drawing on touch */
+/* ── BRANCH LINE ── */
+.branch {
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 7px + 2px);
+  width: 0;
+  height: 1px;
+  background: linear-gradient(to right, var(--green, #33ad3b), rgba(51, 173, 59, 0.3));
+  transform-origin: left center;
+  animation: branchGrow 0.5s ease-out forwards;
 }
-/* ------------------ end ----------------------- */
 
-/* ---------- timeline date label ------------- */
+.timeline-item:nth-child(even) .branch {
+  left: auto;
+  right: calc(50% + 7px + 2px);
+  background: linear-gradient(to left, var(--green, #33ad3b), rgba(51, 173, 59, 0.3));
+  transform-origin: right center;
+}
+
+@keyframes branchGrow {
+  to { width: var(--branch-length); }
+}
+
+/* ── DATE LABEL ── */
 .date-label {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   width: 9rem;
-  font-family: "Orbitron", sans-serif;
-  letter-spacing: 0.12em;
-  font-size: 0.7rem;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  letter-spacing: 0.14em;
+  font-size: 10px;
   text-transform: uppercase;
-  color: rgba(178, 255, 187, 0.7);
+  color: rgba(178, 255, 187, 0.6);
 }
 
 .timeline-item:nth-child(odd) .date-label {
@@ -131,93 +162,45 @@
   text-align: left;
 }
 
-/*--------------------------------BRANCH LINE CODE----------------------------------*/
-
-/* --- branch styling & animation --- */
-.branch {
-  position: absolute;
-  top: 50%;   
-  /* start just outside the right edge of the circle: */
-  left: calc(50% + 0.40rem + 4px);
-  width: 0;                   
-  height: 4px;
-  background: #7CFC00;
-  transform-origin: left center;
-  animation: branchGrow 0.5s ease-out forwards;
-}
-
-/* for those “reversed” items, mirror it on the right side */
-.timeline-item:nth-child(even) .branch {
-  left: auto;
-  right: calc(50% + 0.40rem + 4px);
-  transform-origin: right center;
-}
-
-/* 1) common animation + centering for every .content */
-.timeline-item:nth-child(odd)  .content,
-.timeline-item:nth-child(even) .content {
-  animation-duration: 0.45s;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;
-  animation-delay: var(--fade-delay, 0.5s);
-  text-align: center;
-}
-
-/* 2) pick the right fade based on odd/even */
-.timeline-item:nth-child(odd)  .content { animation-name: fadeRight; }
-.timeline-item:nth-child(even) .content { animation-name: fadeLeft;  }
-
-/* 3) “flush to branch” margins */
-/* odd → sit to the right of the spine */
-.timeline-item:nth-child(odd)  .content {
-  margin-left:  calc(50% + var(--branch-length) + 1rem);
-  margin-right: auto;
-}
-/* even → sit to the left */
-.timeline-item:nth-child(even) .content {
-  margin-left: auto;
-  margin-right: calc(50% + var(--branch-length) + 1rem);
-}
-
-/* 4) flip the flex order for odd items */
-.timeline-item:nth-child(odd) {
-  flex-direction: row-reverse;
-}
-
-/* match the length of your static offset */
-/* timeline-item branchGrow keyframes */
-@keyframes branchGrow {
-  to { width: var(--branch-length); }
-}
-
-/* the circular markers on the timeline */
-.marker {
-  position: absolute;
-  left: 50%;
-  width: 1.5rem;
-  height: 1.5rem;
-  background: black;
-  border: 4px solid #7CFC00;
-  border-radius: 50%;
-  transform: translateX(-50%);
-}
-
-/* make your card a column‑flex box that truly centers its children */
+/* ── CONTENT WRAPPER ── */
 .content {
   width: clamp(20rem, 42vw, 34rem);
-  opacity: 0; /* Now fade & slide the content in after the branch is done */
+  opacity: 0;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   text-align: center;
   background: transparent;
+  animation-duration: 0.45s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: var(--fade-delay, 0.5s);
 }
 
-/*------------------------project cards-----------------------------*/
+.timeline-item:nth-child(odd) .content {
+  animation-name: fadeRight;
+  margin-left: calc(50% + var(--branch-length) + 1rem);
+  margin-right: auto;
+}
+
+.timeline-item:nth-child(even) .content {
+  animation-name: fadeLeft;
+  margin-left: auto;
+  margin-right: calc(50% + var(--branch-length) + 1rem);
+}
+
+.timeline-item:nth-child(odd) {
+  flex-direction: row-reverse;
+}
+
+/* ══════════════════════════════════
+   PROJECT CARD — NEW DESIGN
+   ══════════════════════════════════ */
+
 .project-card {
   width: 100%;
   max-width: 520px;
-  height: 320px;
+  height: 300px;
   border: none;
   padding: 0;
   background: transparent;
@@ -229,7 +212,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 22px;
+  border-radius: var(--r-md, 14px);
   transform-style: preserve-3d;
   transition: transform 700ms cubic-bezier(0.2, 0.9, 0.2, 1);
 }
@@ -241,34 +224,22 @@
 .project-card-face {
   position: absolute;
   inset: 0;
-  border-radius: 22px;
+  border-radius: var(--r-md, 14px);
   backface-visibility: hidden;
   transform-style: preserve-3d;
-  background: rgba(22, 22, 22, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  color: #fff;
+  background: var(--bg-2, #0f1416);
+  border: 1px solid var(--line, rgba(178, 255, 187, 0.13));
+  color: var(--ink, #eaf1ec);
+  transition: border-color 0.3s;
 }
 
+.project-card:hover .project-card-face {
+  border-color: var(--line-h, rgba(178, 255, 187, 0.32));
+}
+
+/* ── FRONT ── */
 .project-card-front {
   overflow: hidden;
-}
-
-.project-card-back {
-  transform: rotateY(180deg);
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.project-card-paragraph {
-  margin: 0;
-  font-family: "Orbitron", sans-serif;
-  font-size: clamp(13px, 1.4vw, 15px);
-  line-height: 1.85;
-  letter-spacing: 0.08em;
-  text-transform: none;
-  color: #d6d8db;
 }
 
 .project-card-photo {
@@ -278,85 +249,153 @@
   height: 100%;
   object-fit: cover;
   object-position: center 70%;
-  border-radius: 22px;
+  border-radius: var(--r-md, 14px);
   display: block;
   will-change: transform;
   transform: translateZ(0);
   backface-visibility: hidden;
-  filter: blur(0px);
+  transition: transform 0.6s ease;
 }
 
+.project-card:hover .project-card-photo {
+  transform: scale(1.04);
+}
+
+/* Gradient overlay — CSS only */
+.project-card-front::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.88) 100%);
+  border-radius: var(--r-md, 14px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Corner label (top-left pill) */
+.project-card-corner {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  background: var(--overlay);
+  border: 1px solid rgba(178, 255, 187, 0.32);
+  backdrop-filter: blur(6px);
+  padding: 4px 9px;
+  border-radius: 999px;
+  max-width: 72%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Bottom overlay: name + role */
 .project-card-overlay {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 42px 22px 64px;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.97) 0%,
-    rgba(0, 0, 0, 0.88) 28%,
-    rgba(0, 0, 0, 0.60) 55%,
-    rgba(0, 0, 0, 0.18) 80%,
-    rgba(0, 0, 0, 0.00) 100%
-  );
-  border-bottom-left-radius: 22px;
-  border-bottom-right-radius: 22px;
+  padding: 18px 20px 48px;
+  z-index: 2;
 }
 
 .project-card-name {
-  font-family: "Orbitron", sans-serif;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-size: 1.05rem;
-  color: #f0f2f4;
-  margin-bottom: 10px;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.55);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 .project-card-role {
-  font-family: "Orbitron", sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.20em;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-size: 0.7rem;
-  color: rgba(210, 214, 218, 0.95);
-  margin-bottom: -10px;
+  color: #b2ffbb;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* External link (bottom-left) */
 .project-card-link {
   position: absolute;
-  bottom: 16px;
-  left: 16px;
-  width: 38px;
-  height: 38px;
-  border-radius: 999px;
-  background: #1b1b1b;
-  color: #fff;
+  bottom: 12px;
+  left: 12px;
+  z-index: 3;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--overlay);
+  border: 1px solid rgba(178, 255, 187, 0.32);
+  backdrop-filter: blur(6px);
+  color: #b2ffbb;
+  font-size: 14px;
   display: grid;
   place-items: center;
-  font-family: "Orbitron", sans-serif;
-  font-size: 0.95rem;
   text-decoration: none;
-  opacity: 0.92;
-  z-index: 5;
+  transition: background 0.2s, border-color 0.2s;
 }
 
-.project-card-action {
+.project-card-link:hover {
+  background: var(--green, #33ad3b);
+  color: #06180a;
+  border-color: var(--green, #33ad3b);
+}
+
+/* Plus / flip button (bottom-right) */
+.project-card-plus {
   position: absolute;
-  bottom: 16px;
-  right: 16px;
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  background: #fff;
-  color: #000;
-  font-size: 1.45rem;
+  bottom: 12px;
+  right: 12px;
+  z-index: 3;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--overlay);
+  border: 1px solid rgba(178, 255, 187, 0.32);
+  backdrop-filter: blur(8px);
+  color: #b2ffbb;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 16px;
   display: grid;
   place-items: center;
-  z-index: 5;
+  transition: background 0.2s, transform 0.3s, border-color 0.2s;
+}
+
+.project-card:hover .project-card-plus {
+  background: var(--green, #33ad3b);
+  color: #06180a;
+  border-color: var(--green, #33ad3b);
+  transform: rotate(90deg);
+}
+
+.project-card.flipped .project-card-plus {
+  transform: rotate(45deg);
+}
+
+/* ── BACK ── */
+.project-card-back {
+  transform: rotateY(180deg);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--bg-1, #0a0e10);
+}
+
+.project-card-paragraph {
+  margin: 0;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: clamp(13px, 1.3vw, 15px);
+  line-height: 1.75;
+  color: var(--ink-2, #b6c2bb);
 }
 
 .project-card-links {
@@ -368,130 +407,147 @@
 
 .project-pill {
   text-decoration: none;
-  font-family: "Orbitron", sans-serif;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
   letter-spacing: 0.1em;
-  font-size: 0.72rem;
-  padding: 10px 12px;
+  font-size: 10px;
+  text-transform: uppercase;
+  padding: 8px 12px;
   border-radius: 999px;
   border: 1px solid rgba(178, 255, 187, 0.25);
-  color: #d6d8db;
+  color: var(--ink-2, #b6c2bb);
   background: rgba(255, 255, 255, 0.02);
+  transition: border-color 0.2s, color 0.2s;
 }
 
-/*--------------------------- Fades animations ---------------------------------- */
-
-/* simple fade‑in animation */
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: none;
-  }
+.project-pill:hover {
+  border-color: var(--green-soft, #b2ffbb);
+  color: var(--green-soft, #b2ffbb);
 }
 
-/* Define the two directional fades */
+/* Close button on back face */
+.project-card-action {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--line, rgba(178, 255, 187, 0.13));
+  color: var(--ink-2, #b6c2bb);
+  font-size: 1.2rem;
+  display: grid;
+  place-items: center;
+  z-index: 5;
+}
+
+/* ══════════════════════════════════
+   HANDWRITTEN DEMO WIDGET
+   ══════════════════════════════════ */
+
+.hdemo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hdemo-btns {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hdemo-btns button {
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--green, #33ad3b);
+  background: transparent;
+  color: var(--green, #33ad3b);
+  cursor: pointer;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+.hdemo-canvas {
+  border: 1px solid var(--green, #33ad3b);
+  border-radius: 0.5rem;
+  background: black;
+  touch-action: none;
+}
+
+/* ══════════════════════════════════
+   FADE ANIMATIONS
+   ══════════════════════════════════ */
+
 @keyframes fadeRight {
-  0% {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes fadeLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
-/* 1) define fadeDown (starts 30px above, then drops into place) */
 @keyframes fadeDown {
-  0% {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-30px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/*--------------------------------MOBILE CODE START----------------------------------*/
+/* ══════════════════════════════════
+   MOBILE (≤ 600px)
+   ══════════════════════════════════ */
 @media (max-width: 600px) {
-  /* === MOBILE (≤ 600 px) – vertical-rail layout ===================== */
-
-  /* 1. kill only the side arms */
   .branch, .marker { display: none; }
+
   .date-label {
     position: static;
     width: auto;
     text-align: right;
-    margin: 0 0 0.6rem 0;
+    margin: 0 0 0.6rem;
     transform: none;
     width: 100%;
     padding-right: 0.6rem;
   }
 
-  /* 3) stack & center your cards under that rail */
-  .timeline-item {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-  }
-  .content {
-    margin: 1rem auto !important;
-    width: calc(100% - 2rem) !important;
-    text-align: left;
-  }
-
-  .timeline   { position: relative; }
-  .timeline::before { z-index: -1 !important; }
-  .timeline-item .content {
-    position: relative;
-    background:#1a1a1a !important;
-    z-index: 1 !important;
-  }
-
-  /* 2) if you still see desktop nth-child rules, neutralize them */
-  .timeline-item:nth-child(odd)  .content,
-  .timeline-item:nth-child(even) .content {
-    animation-name: fadeDown !important;
-    animation-delay: var(--delay, 0s);
-  }
-
-  /* 1) force a single‐column layout for every item */
   .timeline-item,
   .timeline-item:nth-child(odd),
   .timeline-item:nth-child(even) {
     display: flex !important;
     flex-direction: column !important;
-    align-items: flex-start; /* or center, if you prefer */
+    align-items: center !important;
   }
 
-  /* 2) reset all the odd/even margins so cards just stack under the rail */
   .timeline-item .content {
-    margin: 0 auto !important;
-    width: calc(100% - 2rem); /* or whatever your mobile width is */
+    margin: 1rem auto !important;
+    width: calc(100% - 2rem) !important;
+    text-align: left;
   }
 
-  /* 3) (optional) if you’d rather block‐render, you can ditch flex entirely: */
-  .timeline-item { display: block !important; 
+  .timeline-item:nth-child(odd) .content,
+  .timeline-item:nth-child(even) .content {
+    animation-name: fadeDown !important;
+    animation-delay: var(--delay, 0s);
+    margin: 0 auto !important;
+    width: calc(100% - 2rem);
   }
+
+  .timeline { position: relative; }
+  .timeline::before { z-index: -1 !important; }
+
+  .timeline-item .content {
+    position: relative;
+    background: var(--bg-1, #0a0e10) !important;
+    z-index: 1 !important;
+  }
+
+  .timeline-item { display: block !important; }
 
   .project-card {
-    height: 280px;
+    height: 260px;
     max-width: 100%;
   }
 
   .project-card-name {
-    font-size: 0.95rem;
+    font-size: 16px;
   }
 }
-/*--------------------------------MOBILE CODE END----------------------------------*/

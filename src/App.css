@@ -1,14 +1,10 @@
 .App {
-  /* make your container fill the screen... */
   width: 100vw;
   min-height: 100vh;
-
-  /* ...and hide any children outside its bounds */
-
-  /* ensure it’s the clipping context */
   position: relative;
   display: flex;
   flex-direction: column;
+  background: transparent;
 }
 
 .page-content {
@@ -20,15 +16,70 @@ html {
   overflow-x: hidden;
 }
 
-body{
-  background-color: #000000;
-  color:antiquewhite
+/* ── PAGE BACKGROUND (responds to theme via CSS vars) ── */
+.site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: var(--bg);
+  pointer-events: none;
 }
 
-.intro, .name, .description {
-  margin: 0; /* Removes default margin */
-  padding: 0; /* Removes default padding */
-  text-align: center; /* Centers text */
+/* ── FULL-SITE GRID BACKGROUND ── */
+.site-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── FLOATING SPHERE THEME TOGGLE ── */
+.theme-fab {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: 9999;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: radial-gradient(
+    circle at 35% 32%,
+    rgba(220, 255, 220, 0.95) 0%,
+    rgba(80, 200, 90, 0.85) 30%,
+    rgba(30, 120, 40, 0.95) 65%,
+    rgba(6, 8, 10, 0.75) 100%
+  );
+  box-shadow:
+    0 4px 20px rgba(51, 173, 59, 0.5),
+    inset 0 -4px 10px rgba(0, 0, 0, 0.35),
+    inset 2px 2px 6px rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-size: 1.25rem;
+  display: grid;
+  place-items: center;
+  animation: sphereFloat 3.5s ease-in-out infinite;
+  transition: box-shadow 0.2s ease;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.theme-fab:hover {
+  box-shadow:
+    0 8px 32px rgba(51, 173, 59, 0.75),
+    inset 0 -4px 10px rgba(0, 0, 0, 0.35),
+    inset 2px 2px 6px rgba(255, 255, 255, 0.25);
+  animation-play-state: paused;
+}
+
+@keyframes sphereFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -1,23 +1,107 @@
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS — dark mode (default)
+   ═══════════════════════════════════════════ */
+:root {
+  --bg:         #06080a;
+  --bg-1:       #0a0e10;
+  --bg-2:       #0f1416;
+  --bg-3:       #141a1c;
+  --line:       rgba(178, 255, 187, 0.13);
+  --line-h:     rgba(178, 255, 187, 0.32);
+  --ink:        #eaf1ec;
+  --ink-2:      #b6c2bb;
+  --ink-3:      #7b8780;
+  --ink-4:      #4f5a55;
+  --green:      #33ad3b;
+  --green-soft: #b2ffbb;
+  --green-deep: #16401b;
+  --green-glow: rgba(51, 173, 59, 0.45);
+  --r-sm:  8px;
+  --r-md:  14px;
+  --r-lg:  20px;
+  --max:   1320px;
+
+  --overlay:    rgba(6, 8, 10, 0.70);
+  --pulse-color: rgba(0, 255, 80, 0.18);
+
+  /* Grid overlay colour — bumped up in light mode */
+  --grid-line: rgba(0, 255, 80, 0.04);
+}
+
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS — light mode (ivory)
+   ═══════════════════════════════════════════ */
+[data-theme="light"] {
+  --bg:         #FFFFE3;
+  --bg-1:       #F9F9D9;
+  --bg-2:       #F2F2CE;
+  --bg-3:       #EAEAC3;
+  --line:       rgba(51, 173, 59, 0.20);
+  --line-h:     rgba(51, 173, 59, 0.50);
+  --ink:        #0e1c10;
+  --ink-2:      #2e4c31;
+  --ink-3:      #567a59;
+  --ink-4:      #86a889;
+  --green:      #1a8a22;
+  --green-soft: #0f6e17;
+  --green-deep: rgba(26, 138, 34, 0.10);
+  --green-glow: rgba(26, 138, 34, 0.25);
+
+  --overlay:    rgba(6, 8, 10, 0.55);
+  --pulse-color: rgba(0, 160, 40, 0.14);
+
+  /* Grid is slightly stronger so it stays visible on the pale bg */
+  --grid-line: rgba(0, 160, 40, 0.07);
+}
+
+/* ═══════════════════════════════════════════
+   SMOOTH THEME TRANSITION
+   Only applies during the ~400ms switch window.
+   This avoids slowing down hover / card-flip
+   animations during normal interaction.
+   ═══════════════════════════════════════════ */
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition:
+    background-color 0.35s ease,
+    background     0.35s ease,
+    color          0.35s ease,
+    border-color   0.35s ease,
+    box-shadow     0.35s ease,
+    fill           0.35s ease !important;
+}
+
+/* ═══════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════ */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  background: transparent;
+  color: var(--ink);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
 }
 
-/* When screen width is 768px or less, show the hamburger icon and hide desktop nav links */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-  .hamburger {
-    display: flex;
-  }
+/* ═══════════════════════════════════════════
+   SHARED: grid overlay used in page hero sections
+   ═══════════════════════════════════════════ */
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
 }

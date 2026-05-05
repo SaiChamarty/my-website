@@ -4,15 +4,15 @@
 .footer {
   width: 100%;
   padding: 3rem 1.5rem 2rem;
-  background: #000;
-  color: antiquewhite;
+  background: var(--bg);
+  color: var(--ink);
   text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--line);
 }
 
 .heading {
   font-family: 'Jersey 10', sans-serif;
-  color: #33AD3B;
+  color: var(--green);
   font-size: clamp(1.6rem, 4vw, 2.4rem);
   margin-bottom: 1.2rem;
 }
@@ -31,8 +31,8 @@
   width: 42px;
   height: 42px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(51, 173, 59, 0.25);
+  background: var(--bg-2);
+  border: 1px solid var(--line);
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
