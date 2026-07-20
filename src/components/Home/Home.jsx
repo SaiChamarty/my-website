@@ -82,12 +82,13 @@ export default function Home() {
             Building{" "}
             <span className={styles.accent}>intelligent</span>
             <br />
-            <span className={styles.serif}>robotic systems</span>
+            <span className={styles.serif}>agents &amp; machines</span>
           </h1>
 
           <p className={styles.lead}>
-            CS undergraduate focused on machine learning, computer vision, and
-            robotics — building systems that connect perception to physical hardware.
+            CS undergraduate focused on agentic AI, robotics, and AI chip
+            performance — writing firmware and software that bring intelligence
+            to real hardware.
           </p>
 
           <div className={styles.heroCta}>
@@ -332,7 +333,7 @@ export default function Home() {
           Building <strong>Junebase Robotics</strong> — collaborative countertop robot prototype.{" "}
           Training <strong>Saiborg</strong> — a transformer-based conversational LLM.
         </div>
-        <a href="/saiborg" className={styles.btnGhost}>Chat with Saiborg</a>
+        {/* <a href="/saiborg" className={styles.btnGhost}>Chat with Saiborg</a> */}
       </div>
 
     </div>

@@ -5,7 +5,8 @@ import { ThemeProvider } from './context/ThemeContext';
 import { useTheme } from './context/ThemeContext';
 import Home from './components/Home/Home';
 import Projects from './components/Projects/Projects';
-import Saiborg from './components/Saiborg/Saiborg';
+import Experience from './components/Experience/Experience';
+// import Saiborg from './components/Saiborg/Saiborg';
 import About from './components/About/About';
 import Notfound from './components/Notfound/Notfound';
 import Research from './components/Research/Research';
@@ -14,7 +15,7 @@ import Footer from './components/Footer/Footer';
 
 function AppLayout() {
   const location = useLocation();
-  const hideFooter = location.pathname === '/projects';
+  const hideFooter = location.pathname === '/projects' || location.pathname === '/experience';
   const { theme, toggle: toggleTheme } = useTheme();
 
   return (
@@ -26,8 +27,8 @@ function AppLayout() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/experience" element={<Experience />} />
           <Route path="/research" element={<Research />} />
-          <Route path="/saiborg" element={<Saiborg />} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<Notfound />} />
         </Routes>

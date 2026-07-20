@@ -45,6 +45,12 @@
   width: 20px;
   height: 20px;
   object-fit: contain;
+  transition: filter 0.35s ease;
+}
+
+/* The icon glyphs are white PNGs/WebPs — flip them dark on the light theme */
+:global([data-theme='light']) .links img {
+  filter: invert(0.92) sepia(0.15) hue-rotate(60deg);
 }
 
 .meta {
